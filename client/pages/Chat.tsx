@@ -175,6 +175,47 @@ export default function Chat() {
         </div>
       </div>
 
+      {/* Auth Modal */}
+      {showAuthPrompt && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card border border-border rounded-2xl p-8 max-w-md w-full animate-fade-in-up">
+            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 mb-6">
+              <Sparkles className="text-primary" size={24} />
+            </div>
+
+            <h2 className="text-2xl font-semibold text-foreground mb-2">Sign in to continue</h2>
+            <p className="text-muted-foreground mb-8">
+              Create an account to start chatting with RobloxAI.
+            </p>
+
+            <div className="space-y-3 mb-6">
+              <Link
+                to="/register"
+                className="block w-full py-3 px-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-center font-medium"
+              >
+                Create Account
+              </Link>
+              <button
+                onClick={() => {
+                  setShowAuthPrompt(false);
+                  setIsAuthenticated(true);
+                }}
+                className="block w-full py-3 px-4 border border-border text-foreground rounded-lg hover:bg-secondary/50 transition-colors font-medium"
+              >
+                Demo (No signup)
+              </button>
+            </div>
+
+            <button
+              onClick={() => setShowAuthPrompt(false)}
+              className="w-full py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Maybe later
+            </button>
+          </div>
+        </div>
+      )}
+
       <style>{`
         .animation-delay-200 {
           animation-delay: 0.2s;
