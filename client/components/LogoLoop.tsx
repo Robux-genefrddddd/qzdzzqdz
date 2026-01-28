@@ -78,6 +78,22 @@ const useAnimationLoop = (
   const lastTimestampRef = useRef<number | null>(null);
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
+  const isHoveredRef = useRef(isHovered);
+  const hoverSpeedRef = useRef(hoverSpeed);
+  const targetVelocityRef = useRef(targetVelocity);
+
+  // Update refs without triggering re-render
+  useEffect(() => {
+    isHoveredRef.current = isHovered;
+  }, [isHovered]);
+
+  useEffect(() => {
+    hoverSpeedRef.current = hoverSpeed;
+  }, [hoverSpeed]);
+
+  useEffect(() => {
+    targetVelocityRef.current = targetVelocity;
+  }, [targetVelocity]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -101,7 +117,10 @@ const useAnimationLoop = (
       const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
       lastTimestampRef.current = timestamp;
 
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+      // Use refs instead of state variables to avoid stale closures
+      const target = isHoveredRef.current && hoverSpeedRef.current !== undefined
+        ? hoverSpeedRef.current
+        : targetVelocityRef.current;
 
       const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
       velocityRef.current += (target - velocityRef.current) * easingFactor;
@@ -129,7 +148,7 @@ const useAnimationLoop = (
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+  }, [seqWidth, seqHeight, isVertical, trackRef]);
 };
 
 export interface LogoItem {
