@@ -128,12 +128,8 @@ const useAnimationLoop = (
       if (seqSize > 0) {
         offsetRef.current += velocityRef.current * deltaTime;
 
-        // Keep offset within bounds without visible jumps
-        if (offsetRef.current >= seqSize) {
-          offsetRef.current -= seqSize;
-        } else if (offsetRef.current < 0) {
-          offsetRef.current += seqSize;
-        }
+        // Keep offset within bounds without visible jumps using modulo
+        offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
 
         const transformValue = isVertical
           ? `translate3d(0, ${-offsetRef.current}px, 0)`
