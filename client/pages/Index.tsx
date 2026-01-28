@@ -97,9 +97,9 @@ export default function Index() {
       </section>
 
       {/* Tech Stack Section - minimal */}
-      <section className="border-t border-border/30 py-16 sm:py-20">
+      <section className="border-t border-border/20 py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-medium text-white/40 uppercase tracking-widest mb-12">
+          <p className="text-center text-xs font-normal text-white/30 uppercase tracking-widest mb-8">
             Built with modern technology
           </p>
 
