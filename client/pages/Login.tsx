@@ -44,11 +44,17 @@ export default function Login() {
           <form onSubmit={handleLogin} className="space-y-4">
             {/* Email input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Email
               </label>
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <Mail
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="email"
                   type="email"
@@ -63,11 +69,17 @@ export default function Login() {
 
             {/* Password input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Password
               </label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <Lock
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="password"
                   type="password"
@@ -83,8 +95,13 @@ export default function Login() {
             {/* Remember me & forgot password */}
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4 rounded border-border" />
-                <span className="text-muted-foreground hover:text-foreground">Remember me</span>
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded border-border"
+                />
+                <span className="text-muted-foreground hover:text-foreground">
+                  Remember me
+                </span>
               </label>
               <a href="#" className="text-primary hover:underline">
                 Forgot password?
@@ -104,7 +121,9 @@ export default function Login() {
           {/* Divider */}
           <div className="my-6 flex items-center gap-4">
             <div className="flex-1 h-px bg-border" />
-            <span className="text-sm text-muted-foreground">Or continue with</span>
+            <span className="text-sm text-muted-foreground">
+              Or continue with
+            </span>
             <div className="flex-1 h-px bg-border" />
           </div>
 
@@ -149,13 +168,15 @@ export default function Login() {
           {/* Sign up link */}
           <p className="text-center text-sm text-muted-foreground mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-primary font-medium hover:underline">
+            <Link
+              to="/register"
+              className="text-primary font-medium hover:underline"
+            >
               Sign up
             </Link>
           </p>
         </div>
       </div>
-
     </div>
   );
 }

@@ -37,7 +37,9 @@ export default function LogoLoop({
     >
       <div
         className={`flex gap-8 items-center ${
-          isVertical ? "flex-col animate-scroll-vertical" : "animate-scroll-horizontal"
+          isVertical
+            ? "flex-col animate-scroll-vertical"
+            : "animate-scroll-horizontal"
         } ${onHoverDecelerate ? "hover:pause" : ""} ${speedClass}`}
         style={{
           animation: isVertical

@@ -19,7 +19,9 @@ export default function Footer() {
                 alt="Roblox"
                 className="h-6 object-contain"
               />
-              <p className="text-xs text-white/50">Not an official Roblox site</p>
+              <p className="text-xs text-white/50">
+                Not an official Roblox site
+              </p>
             </div>
           </div>
 
@@ -28,17 +30,26 @@ export default function Footer() {
             <h3 className="font-bold text-sm mb-4 text-white">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Cookie Policy
                 </a>
               </li>
@@ -50,17 +61,26 @@ export default function Footer() {
             <h3 className="font-bold text-sm mb-4 text-white">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Keyboard Shortcuts
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
                   Support
                 </a>
               </li>

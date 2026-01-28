@@ -97,7 +97,8 @@ export default function Chat() {
                 Start a new conversation
               </h2>
               <p className="text-muted-foreground max-w-md">
-                Ask me anything about Roblox game development, scripting, design, monetization, and more.
+                Ask me anything about Roblox game development, scripting,
+                design, monetization, and more.
               </p>
             </div>
           ) : (
@@ -183,7 +184,9 @@ export default function Chat() {
               <Sparkles className="text-primary" size={24} />
             </div>
 
-            <h2 className="text-2xl font-semibold text-foreground mb-2">Sign in to continue</h2>
+            <h2 className="text-2xl font-semibold text-foreground mb-2">
+              Sign in to continue
+            </h2>
             <p className="text-muted-foreground mb-8">
               Create an account to start chatting with PinIA.
             </p>

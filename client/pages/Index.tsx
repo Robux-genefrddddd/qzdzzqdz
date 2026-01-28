@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, MessageSquare, Cpu, Code2, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Zap,
+  MessageSquare,
+  Cpu,
+  Code2,
+  Sparkles,
+} from "lucide-react";
 import LogoLoop from "@/components/LogoLoop";
 import Footer from "@/components/Footer";
 
@@ -42,7 +49,10 @@ export default function Index() {
             className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium group"
           >
             Start chatting
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight
+              size={18}
+              className="group-hover:translate-x-1 transition-transform"
+            />
           </Link>
         </div>
       </section>

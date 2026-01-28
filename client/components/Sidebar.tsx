@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Menu, Plus, Search, Settings, LogOut, MessageCircle } from "lucide-react";
+import {
+  Menu,
+  Plus,
+  Search,
+  Settings,
+  LogOut,
+  MessageCircle,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface SidebarProps {
@@ -85,13 +92,18 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
               className="w-full text-left px-3 py-2 rounded-lg hover:bg-sidebar-accent transition-colors group"
             >
               <div className="flex items-start gap-2">
-                <MessageCircle size={16} className="mt-1 text-sidebar-foreground/60 flex-shrink-0" />
+                <MessageCircle
+                  size={16}
+                  className="mt-1 text-sidebar-foreground/60 flex-shrink-0"
+                />
                 {!isCollapsed && (
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-sidebar-foreground truncate group-hover:text-sidebar-primary-foreground">
                       {chat.title}
                     </p>
-                    <p className="text-xs text-sidebar-foreground/40">{chat.date}</p>
+                    <p className="text-xs text-sidebar-foreground/40">
+                      {chat.date}
+                    </p>
                   </div>
                 )}
               </div>

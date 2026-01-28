@@ -59,7 +59,9 @@ export default function Register() {
             </div>
           </div>
 
-          <h2 className="text-3xl font-bold text-foreground mb-2">Create account</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-2">
+            Create account
+          </h2>
           <p className="text-muted-foreground mb-8">
             Get started with PinIA today
           </p>
@@ -75,11 +77,17 @@ export default function Register() {
           <form onSubmit={handleRegister} className="space-y-4">
             {/* Name input */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Full Name
               </label>
               <div className="relative">
-                <User size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <User
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="name"
                   name="name"
@@ -95,11 +103,17 @@ export default function Register() {
 
             {/* Email input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Email
               </label>
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <Mail
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="email"
                   name="email"
@@ -115,11 +129,17 @@ export default function Register() {
 
             {/* Password input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Password
               </label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <Lock
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="password"
                   name="password"
@@ -138,11 +158,17 @@ export default function Register() {
 
             {/* Confirm password input */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3 text-muted-foreground" />
+                <Lock
+                  size={18}
+                  className="absolute left-3 top-3 text-muted-foreground"
+                />
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -188,7 +214,9 @@ export default function Register() {
           {/* Divider */}
           <div className="my-6 flex items-center gap-4">
             <div className="flex-1 h-px bg-border" />
-            <span className="text-sm text-muted-foreground">Or sign up with</span>
+            <span className="text-sm text-muted-foreground">
+              Or sign up with
+            </span>
             <div className="flex-1 h-px bg-border" />
           </div>
 
@@ -235,13 +263,15 @@ export default function Register() {
           {/* Sign in link */}
           <p className="text-center text-sm text-muted-foreground mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-primary font-medium hover:underline">
+            <Link
+              to="/login"
+              className="text-primary font-medium hover:underline"
+            >
               Sign in
             </Link>
           </p>
         </div>
       </div>
-
     </div>
   );
 }
