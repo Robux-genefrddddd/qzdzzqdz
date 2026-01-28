@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
 
-const ANIMATION_CONFIG = { SMOOTH_TAU: 0.08, MIN_COPIES: 2, COPY_HEADROOM: 2 };
+const ANIMATION_CONFIG = { SMOOTH_TAU: 0.08, MIN_COPIES: 3, COPY_HEADROOM: 1 };
 
 const toCssLength = (value: string | number | undefined): string | undefined =>
   typeof value === 'number' ? `${value}px` : (value ?? undefined);
