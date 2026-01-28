@@ -58,37 +58,37 @@ export default function Index() {
       </section>
 
       {/* Features Section */}
-      <section className="border-t border-border/30 py-20 sm:py-32">
+      <section className="border-t border-border/20 py-14 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
             {/* Feature 1 */}
-            <div>
-              <h3 className="font-bold text-sm mb-3 text-white">Scripting</h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+            <div className="group">
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Scripting</h3>
+              <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Optimized Lua patterns and best practices
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div>
-              <h3 className="font-bold text-sm mb-3 text-white">Performance</h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+            <div className="group">
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Performance</h3>
+              <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Optimization and architecture guidance
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div>
-              <h3 className="font-bold text-sm mb-3 text-white">Design</h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+            <div className="group">
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Design</h3>
+              <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Game mechanics and system design
               </p>
             </div>
 
             {/* Feature 4 */}
-            <div>
-              <h3 className="font-bold text-sm mb-3 text-white">Support</h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+            <div className="group">
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Support</h3>
+              <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Instant answers whenever you need help
               </p>
             </div>
