@@ -55,13 +55,13 @@ export default function Register() {
           {/* Logo */}
           <div className="mb-8 text-center">
             <div className="text-2xl font-bold gradient-text inline-block">
-              RobloxAI
+              PinIA
             </div>
           </div>
 
           <h2 className="text-3xl font-bold text-foreground mb-2">Create account</h2>
           <p className="text-muted-foreground mb-8">
-            Get started with RobloxAI today
+            Get started with PinIA today
           </p>
 
           {/* Error message */}
