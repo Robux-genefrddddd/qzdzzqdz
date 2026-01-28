@@ -110,67 +110,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Fade effect */
-.logoloop--fade {
-  position: relative;
-}
-
-.logoloop--fade::before,
-.logoloop--fade::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.logoloop--fade::before {
-  left: 0;
-  background: linear-gradient(
-    to right,
-    var(--logoloop-fadeColor, #000),
-    transparent
-  );
-}
-
-.logoloop--fade::after {
-  right: 0;
-  background: linear-gradient(
-    to left,
-    var(--logoloop-fadeColor, #000),
-    transparent
-  );
-}
-
-.logoloop--vertical.logoloop--fade::before,
-.logoloop--vertical.logoloop--fade::after {
-  width: auto;
-  height: 60px;
-  left: auto;
-  right: auto;
-}
-
-.logoloop--vertical.logoloop--fade::before {
-  top: 0;
-  bottom: auto;
-  background: linear-gradient(
-    to bottom,
-    var(--logoloop-fadeColor, #000),
-    transparent
-  );
-}
-
-.logoloop--vertical.logoloop--fade::after {
-  top: auto;
-  bottom: 0;
-  background: linear-gradient(
-    to top,
-    var(--logoloop-fadeColor, #000),
-    transparent
-  );
-}
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
