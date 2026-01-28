@@ -131,10 +131,10 @@ export default function Index() {
               },
             ]}
             direction="left"
-            speed={50}
-            logoHeight={40}
+            speed={60}
+            logoHeight={36}
             gap={40}
-            hoverSpeed={0}
+            pauseOnHover
             scaleOnHover
             fadeOut
             fadeOutColor="#040404"
