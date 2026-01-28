@@ -81,7 +81,7 @@ export default function Chat() {
             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <h1 className="text-lg font-semibold text-foreground flex-1 text-center lg:text-left">
-            Chat with RobloxAI
+            Chat with PinIA
           </h1>
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-sm flex-shrink-0">
             U
