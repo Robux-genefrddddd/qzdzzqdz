@@ -112,7 +112,7 @@ export default function Index() {
                 href: "https://react.dev",
               },
               {
-                src: "https://www.svgrepo.com/show/303157/typescript-new-logo.svg",
+                src: "https://i.ibb.co/TqBgb3HQ/images.png",
                 alt: "TypeScript",
                 title: "TypeScript",
                 href: "https://www.typescriptlang.org",
@@ -124,7 +124,7 @@ export default function Index() {
                 href: "https://tailwindcss.com",
               },
               {
-                src: "https://nodejs.org/static/logos/nodejsHex.svg",
+                src: "https://i.ibb.co/VY9VcypN/nodejs-Hex.png",
                 alt: "Node.js",
                 title: "Node.js",
                 href: "https://nodejs.org",
