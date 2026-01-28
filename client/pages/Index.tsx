@@ -24,38 +24,34 @@ export default function Index() {
       </nav>
 
       {/* Hero Section */}
-      <section className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex flex-col items-center justify-center">
-        <div className="text-center max-w-4xl mx-auto mb-12 animate-fade-in-up">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            Your AI Assistant for
-            <br />
-            <span className="gradient-text">Roblox Game Development</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed">
-            Build faster with intelligent guidance on scripting, game design, monetization strategies,
-            and everything you need to create successful games on Roblox.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link
-              to="/register"
-              className="px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 font-medium flex items-center gap-2"
-            >
-              Start Free <ArrowRight size={20} />
-            </Link>
-            <button className="px-6 py-3 rounded-lg border border-border hover:bg-secondary/50 transition-colors font-medium">
-              Learn More
-            </button>
+      <section className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 flex flex-col items-center justify-center">
+        <div className="text-center max-w-3xl mx-auto animate-fade-in-up">
+          {/* Subtle badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 bg-secondary/20 backdrop-blur-sm mb-8">
+            <Sparkles size={14} className="text-primary" />
+            <span className="text-xs font-medium text-muted-foreground">The smarter way to build on Roblox</span>
           </div>
-        </div>
 
-        {/* Feature preview */}
-        <div className="w-full max-w-3xl mb-12 rounded-lg border border-border bg-secondary/30 p-6 sm:p-8 glass backdrop-blur-sm">
-          <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center text-muted-foreground">
-            <div className="text-center">
-              <MessageSquare size={48} className="mx-auto mb-4 opacity-50" />
-              <p>Chat Interface Preview</p>
-            </div>
-          </div>
+          {/* Main title */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
+            Your AI Assistant
+            <br />
+            <span className="gradient-text">for Roblox</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 leading-relaxed max-w-2xl mx-auto">
+            Expert guidance on scripting, game design, and optimization. Available whenever you need it.
+          </p>
+
+          {/* CTA - subtle */}
+          <Link
+            to="/chat"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium group"
+          >
+            Start chatting
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </section>
 
