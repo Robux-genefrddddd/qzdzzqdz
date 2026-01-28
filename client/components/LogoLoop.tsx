@@ -36,19 +36,27 @@ export default function LogoLoop({
       aria-label="Technology logos"
     >
       <div
-        className={`flex gap-6 items-center ${
+        className={`flex gap-8 items-center justify-center ${
           isVertical
             ? "flex-col animate-scroll-vertical"
             : "animate-scroll-horizontal"
-        } ${onHoverDecelerate ? "hover:pause" : ""} ${speedClass}`}
+        } ${speedClass}`}
         style={{
           animation: isVertical
             ? `scrollVertical ${
-                speed === "slow" ? "20s" : speed === "normal" ? "10s" : "5s"
+                speed === "slow" ? "30s" : speed === "normal" ? "15s" : "8s"
               } linear infinite`
             : `scrollHorizontal ${
-                speed === "slow" ? "20s" : speed === "normal" ? "10s" : "5s"
+                speed === "slow" ? "30s" : speed === "normal" ? "15s" : "8s"
               } linear infinite`,
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.animationPlayState = "paused";
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.animationPlayState = "running";
         }}
       >
         {/* Duplicate logos for seamless loop */}
