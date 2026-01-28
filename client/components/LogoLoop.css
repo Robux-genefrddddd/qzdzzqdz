@@ -32,6 +32,7 @@
   display: flex;
   gap: var(--logoloop-gap);
   align-items: center;
+  min-height: var(--logoloop-logoHeight);
 }
 
 .logoloop--vertical .logoloop__list {
