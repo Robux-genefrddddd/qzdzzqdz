@@ -46,7 +46,8 @@
   justify-content: center;
   flex-shrink: 0;
   height: var(--logoloop-logoHeight);
-  width: auto;
+  min-width: var(--logoloop-logoHeight);
+  padding: 8px 16px;
 }
 
 .logoloop--vertical .logoloop__item {
