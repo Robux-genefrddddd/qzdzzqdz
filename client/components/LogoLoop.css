@@ -1,0 +1,175 @@
+.logoloop {
+  --logoloop-gap: 32px;
+  --logoloop-logoHeight: 28px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.logoloop--horizontal {
+  min-height: var(--logoloop-logoHeight);
+}
+
+.logoloop--vertical {
+  min-width: var(--logoloop-logoHeight);
+}
+
+.logoloop__track {
+  display: flex;
+  gap: var(--logoloop-gap);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.logoloop--vertical .logoloop__track {
+  flex-direction: column;
+}
+
+.logoloop__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--logoloop-gap);
+  align-items: center;
+}
+
+.logoloop--vertical .logoloop__list {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoloop__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: var(--logoloop-logoHeight);
+  width: auto;
+}
+
+.logoloop--vertical .logoloop__item {
+  width: var(--logoloop-logoHeight);
+  height: auto;
+}
+
+.logoloop__link,
+.logoloop__node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.logoloop__link {
+  outline: none;
+}
+
+.logoloop__link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.logoloop__node {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.logoloop img {
+  max-height: var(--logoloop-logoHeight);
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Scale on hover effect */
+.logoloop--scale-hover .logoloop__link:hover,
+.logoloop--scale-hover .logoloop__node:hover {
+  transform: scale(1.15);
+  transition: transform 0.3s ease;
+}
+
+/* Fade effect */
+.logoloop--fade {
+  position: relative;
+}
+
+.logoloop--fade::before,
+.logoloop--fade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.logoloop--fade::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--logoloop-fadeColor, #000),
+    transparent
+  );
+}
+
+.logoloop--fade::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--logoloop-fadeColor, #000),
+    transparent
+  );
+}
+
+.logoloop--vertical.logoloop--fade::before,
+.logoloop--vertical.logoloop--fade::after {
+  width: auto;
+  height: 60px;
+  left: auto;
+  right: auto;
+}
+
+.logoloop--vertical.logoloop--fade::before {
+  top: 0;
+  bottom: auto;
+  background: linear-gradient(
+    to bottom,
+    var(--logoloop-fadeColor, #000),
+    transparent
+  );
+}
+
+.logoloop--vertical.logoloop--fade::after {
+  top: auto;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    var(--logoloop-fadeColor, #000),
+    transparent
+  );
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .logoloop__track {
+    animation: none !important;
+  }
+
+  .logoloop--scale-hover .logoloop__link:hover,
+  .logoloop--scale-hover .logoloop__node:hover {
+    transform: none;
+  }
+}
