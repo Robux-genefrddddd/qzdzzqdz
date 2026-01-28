@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef, useEffect, useState } from "react";
 
 export interface LogoItem {
   node?: ReactNode;
@@ -10,53 +10,141 @@ export interface LogoItem {
 
 interface LogoLoopProps {
   logos: LogoItem[];
-  direction?: "horizontal" | "vertical";
-  speed?: "slow" | "normal" | "fast";
-  onHoverDecelerate?: boolean;
+  direction?: "left" | "right" | "up" | "down";
+  speed?: number; // pixels per second
+  logoHeight?: number;
+  gap?: number;
+  hoverSpeed?: number; // 0 = pause on hover
+  scaleOnHover?: boolean;
+  fadeOut?: boolean;
+  fadeOutColor?: string;
+  ariaLabel?: string;
+  useCustomRender?: boolean;
 }
 
 export default function LogoLoop({
   logos,
-  direction = "horizontal",
-  speed = "normal",
-  onHoverDecelerate = true,
+  direction = "left",
+  speed = 100,
+  logoHeight = 60,
+  gap = 60,
+  hoverSpeed = 0,
+  scaleOnHover = true,
+  fadeOut = false,
+  fadeOutColor = "#000000",
+  ariaLabel = "Logo carousel",
+  useCustomRender = false,
 }: LogoLoopProps) {
-  const speedClass = {
-    slow: "duration-20",
-    normal: "duration-10",
-    fast: "duration-5",
-  }[speed];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const isHorizontal = direction === "left" || direction === "right";
+  const isVertical = direction === "up" || direction === "down";
 
-  const isVertical = direction === "vertical";
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      if (containerRef.current) {
+        setContainerWidth(
+          isHorizontal ? containerRef.current.clientWidth : containerRef.current.clientHeight
+        );
+      }
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [isHorizontal]);
+
+  const isReverse = direction === "right" || direction === "down";
+
+  const getTotalWidth = () => {
+    if (isHorizontal) {
+      return (
+        logos.reduce((sum) => sum + logoHeight + gap, 0) - gap
+      );
+    }
+    return containerWidth;
+  };
+
+  const getTotalHeight = () => {
+    if (isVertical) {
+      return (
+        logos.reduce((sum) => sum + logoHeight + gap, 0) - gap
+      );
+    }
+    return 0;
+  };
+
+  const animationDuration = isHorizontal
+    ? getTotalWidth() / (speed / 1000)
+    : getTotalHeight() / (speed / 1000);
+
+  const dynamicSpeed = hoverSpeed > 0 ? hoverSpeed : speed;
 
   return (
     <div
-      className={`overflow-hidden ${isVertical ? "h-96" : "w-full"}`}
+      ref={containerRef}
+      className={`overflow-hidden ${isHorizontal ? "w-full" : "flex flex-col"}`}
       role="region"
-      aria-label="Technology logos"
+      aria-label={ariaLabel}
+      style={{
+        position: "relative",
+        height: isHorizontal ? "auto" : "400px",
+      }}
     >
+      {/* Fade gradient overlay */}
+      {fadeOut && isHorizontal && (
+        <>
+          <div
+            className="absolute top-0 left-0 h-full z-10 pointer-events-none"
+            style={{
+              width: "60px",
+              backgroundImage: `linear-gradient(to right, ${fadeOutColor}, transparent)`,
+            }}
+          />
+          <div
+            className="absolute top-0 right-0 h-full z-10 pointer-events-none"
+            style={{
+              width: "60px",
+              backgroundImage: `linear-gradient(to left, ${fadeOutColor}, transparent)`,
+            }}
+          />
+        </>
+      )}
+
+      {fadeOut && isVertical && (
+        <>
+          <div
+            className="absolute top-0 left-0 w-full z-10 pointer-events-none"
+            style={{
+              height: "60px",
+              backgroundImage: `linear-gradient(to bottom, ${fadeOutColor}, transparent)`,
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
+            style={{
+              height: "60px",
+              backgroundImage: `linear-gradient(to top, ${fadeOutColor}, transparent)`,
+            }}
+          />
+        </>
+      )}
+
       <div
-        className={`flex gap-8 items-center justify-center ${
-          isVertical
-            ? "flex-col animate-scroll-vertical"
-            : "animate-scroll-horizontal"
-        } ${speedClass}`}
+        className={`flex ${isVertical ? "flex-col" : ""} items-center`}
         style={{
-          animation: isVertical
-            ? `scrollVertical ${
-                speed === "slow" ? "30s" : speed === "normal" ? "15s" : "8s"
-              } linear infinite`
-            : `scrollHorizontal ${
-                speed === "slow" ? "30s" : speed === "normal" ? "15s" : "8s"
-              } linear infinite`,
+          gap: `${gap}px`,
+          animation: `scroll-${direction} ${animationDuration}s linear infinite`,
+          animationPlayState: "running",
         }}
         onMouseEnter={(e) => {
-          const el = e.currentTarget as HTMLElement;
-          el.style.animationPlayState = "paused";
+          if (hoverSpeed === 0) {
+            (e.currentTarget as HTMLElement).style.animationPlayState = "paused";
+          }
         }}
         onMouseLeave={(e) => {
-          const el = e.currentTarget as HTMLElement;
-          el.style.animationPlayState = "running";
+          (e.currentTarget as HTMLElement).style.animationPlayState = "running";
         }}
       >
         {/* Duplicate logos for seamless loop */}
@@ -66,51 +154,88 @@ export default function LogoLoop({
             href={logo.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 flex items-center justify-center transition-all duration-500 group"
+            className="flex-shrink-0 flex items-center justify-center group transition-all duration-300"
             title={logo.title}
+            style={{
+              height: `${logoHeight}px`,
+              minWidth: `${logoHeight}px`,
+            }}
           >
             {logo.node ? (
-              <div className="text-2xl group-hover:scale-110 transition-transform duration-500">
+              <div
+                className={`${scaleOnHover ? "group-hover:scale-125" : ""} transition-transform duration-300`}
+                style={{
+                  fontSize: `${logoHeight * 0.7}px`,
+                }}
+              >
                 {logo.node}
               </div>
             ) : logo.src ? (
               <img
                 src={logo.src}
                 alt={logo.alt || logo.title}
-                className="h-6 object-contain group-hover:scale-105 transition-transform duration-500"
+                className={`h-full object-contain ${
+                  scaleOnHover ? "group-hover:scale-125" : ""
+                } transition-transform duration-300`}
               />
             ) : null}
-            <span className="text-xs text-muted-foreground ml-2 hidden group-hover:block">
-              {logo.title}
-            </span>
           </a>
         ))}
       </div>
 
       <style>{`
-        @keyframes scrollHorizontal {
+        @keyframes scroll-left {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-50% - 1rem));
+            transform: translateX(calc(-50% - ${gap / 2}px));
           }
         }
-        @keyframes scrollVertical {
+
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(calc(-50% - ${gap / 2}px));
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes scroll-up {
           0% {
             transform: translateY(0);
           }
           100% {
-            transform: translateY(calc(-50% - 1rem));
+            transform: translateY(calc(-50% - ${gap / 2}px));
           }
         }
-        .animate-scroll-horizontal {
-          animation: scrollHorizontal 15s linear infinite;
+
+        @keyframes scroll-down {
+          0% {
+            transform: translateY(calc(-50% - ${gap / 2}px));
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
+
+        [style*="scroll-left"] {
           will-change: transform;
           transform: translateZ(0);
         }
-        .animate-scroll-vertical {
-          animation: scrollVertical 15s linear infinite;
+
+        [style*="scroll-right"] {
+          will-change: transform;
+          transform: translateZ(0);
+        }
+
+        [style*="scroll-up"] {
+          will-change: transform;
+          transform: translateZ(0);
+        }
+
+        [style*="scroll-down"] {
           will-change: transform;
           transform: translateZ(0);
         }
