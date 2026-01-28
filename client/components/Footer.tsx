@@ -8,7 +8,9 @@ export default function Footer() {
         <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           {/* Brand section */}
           <div className="flex flex-col items-start">
-            <div className="text-sm font-semibold text-white/90 mb-3">PinIA</div>
+            <div className="text-sm font-semibold text-white/90 mb-3">
+              PinIA
+            </div>
             <p className="text-xs text-white/50 mb-3">
               AI assistant for Roblox creators
             </p>
@@ -27,7 +29,9 @@ export default function Footer() {
 
           {/* Links section */}
           <div>
-            <h3 className="font-medium text-xs mb-3 text-white/70 uppercase tracking-wide">Legal</h3>
+            <h3 className="font-medium text-xs mb-3 text-white/70 uppercase tracking-wide">
+              Legal
+            </h3>
             <ul className="space-y-2">
               <li>
                 <a
@@ -58,7 +62,9 @@ export default function Footer() {
 
           {/* Resources section */}
           <div>
-            <h3 className="font-medium text-xs mb-3 text-white/70 uppercase tracking-wide">Resources</h3>
+            <h3 className="font-medium text-xs mb-3 text-white/70 uppercase tracking-wide">
+              Resources
+            </h3>
             <ul className="space-y-2">
               <li>
                 <a

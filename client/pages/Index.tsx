@@ -63,7 +63,9 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
             {/* Feature 1 */}
             <div className="group">
-              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Scripting</h3>
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">
+                Scripting
+              </h3>
               <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Optimized Lua patterns and best practices
               </p>
@@ -71,7 +73,9 @@ export default function Index() {
 
             {/* Feature 2 */}
             <div className="group">
-              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Performance</h3>
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">
+                Performance
+              </h3>
               <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Optimization and architecture guidance
               </p>
@@ -79,7 +83,9 @@ export default function Index() {
 
             {/* Feature 3 */}
             <div className="group">
-              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Design</h3>
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">
+                Design
+              </h3>
               <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Game mechanics and system design
               </p>
@@ -87,7 +93,9 @@ export default function Index() {
 
             {/* Feature 4 */}
             <div className="group">
-              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">Support</h3>
+              <h3 className="font-medium text-xs mb-2 text-white/80 uppercase tracking-wide">
+                Support
+              </h3>
               <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/60 transition-colors duration-300">
                 Instant answers whenever you need help
               </p>
