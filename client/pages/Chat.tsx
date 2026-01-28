@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Menu, X } from "lucide-react";
+import { Send, Menu, X, Sparkles, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 
 interface Message {
@@ -10,6 +11,8 @@ interface Message {
 }
 
 export default function Chat() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -30,6 +33,12 @@ export default function Chat() {
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
+
+    // If not authenticated, show auth prompt
+    if (!isAuthenticated) {
+      setShowAuthPrompt(true);
+      return;
+    }
 
     // Add user message
     const userMessage: Message = {
