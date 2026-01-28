@@ -185,7 +185,7 @@ export default function Chat() {
 
             <h2 className="text-2xl font-semibold text-foreground mb-2">Sign in to continue</h2>
             <p className="text-muted-foreground mb-8">
-              Create an account to start chatting with RobloxAI.
+              Create an account to start chatting with PinIA.
             </p>
 
             <div className="space-y-3 mb-6">
