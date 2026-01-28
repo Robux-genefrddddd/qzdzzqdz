@@ -137,9 +137,13 @@ const useAnimationLoop = (
       if (seqSize > 0) {
         offsetRef.current += velocityRef.current * deltaTime;
 
-        // Only reset if offset gets too large (invisible reset far away)
-        if (offsetRef.current > seqSize * 5) {
-          offsetRef.current -= seqSize * 4;
+        // Reset offset every sequence length to keep it within bounds
+        // This creates a seamless infinite loop
+        while (offsetRef.current >= seqSize) {
+          offsetRef.current -= seqSize;
+        }
+        while (offsetRef.current < 0) {
+          offsetRef.current += seqSize;
         }
 
         const transformValue = isVertical
