@@ -60,10 +60,7 @@ export default function Index() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {/* Feature 1 */}
-            <div className="group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Code2 className="text-primary" size={20} />
-              </div>
+            <div>
               <h3 className="font-semibold text-sm mb-2">Scripting</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Optimized Lua patterns and best practices for Roblox development
@@ -71,10 +68,7 @@ export default function Index() {
             </div>
 
             {/* Feature 2 */}
-            <div className="group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Zap className="text-primary" size={20} />
-              </div>
+            <div>
               <h3 className="font-semibold text-sm mb-2">Performance</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Optimization strategies and architecture guidance
@@ -82,10 +76,7 @@ export default function Index() {
             </div>
 
             {/* Feature 3 */}
-            <div className="group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Cpu className="text-primary" size={20} />
-              </div>
+            <div>
               <h3 className="font-semibold text-sm mb-2">Design</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Game mechanics and system design for scalability
@@ -93,10 +84,7 @@ export default function Index() {
             </div>
 
             {/* Feature 4 */}
-            <div className="group">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <MessageSquare className="text-primary" size={20} />
-              </div>
+            <div>
               <h3 className="font-semibold text-sm mb-2">Support</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Instant answers available whenever you need help
