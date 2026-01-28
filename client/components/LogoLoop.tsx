@@ -93,7 +93,7 @@ export default function LogoLoop({
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(calc(-50% - 1rem));
           }
         }
         @keyframes scrollVertical {
@@ -101,17 +101,18 @@ export default function LogoLoop({
             transform: translateY(0);
           }
           100% {
-            transform: translateY(-50%);
+            transform: translateY(calc(-50% - 1rem));
           }
         }
         .animate-scroll-horizontal {
-          animation: scrollHorizontal 10s linear infinite;
+          animation: scrollHorizontal 15s linear infinite;
+          will-change: transform;
+          transform: translateZ(0);
         }
         .animate-scroll-vertical {
-          animation: scrollVertical 10s linear infinite;
-        }
-        .hover\:pause:hover {
-          animation-play-state: paused;
+          animation: scrollVertical 15s linear infinite;
+          will-change: transform;
+          transform: translateZ(0);
         }
       `}</style>
     </div>
