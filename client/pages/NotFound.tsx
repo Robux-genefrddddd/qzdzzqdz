@@ -18,7 +18,7 @@ const NotFound = () => {
       <nav className="border-b border-border backdrop-blur-sm bg-background/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
           <Link to="/" className="text-2xl font-bold gradient-text">
-            RobloxAI
+            PinIA
           </Link>
         </div>
       </nav>
