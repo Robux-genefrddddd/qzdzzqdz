@@ -109,10 +109,10 @@ const useAnimationLoop = (
     let seqSize = isVertical ? seqHeightRef.current : seqWidthRef.current;
 
     if (seqSize > 0) {
-      offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
+      // Initialize to 0
       const transformValue = isVertical
-        ? `translate3d(0, ${-offsetRef.current}px, 0)`
-        : `translate3d(${-offsetRef.current}px, 0, 0)`;
+        ? `translate3d(0, 0px, 0)`
+        : `translate3d(0px, 0, 0)`;
       track.style.transform = transformValue;
     }
 
