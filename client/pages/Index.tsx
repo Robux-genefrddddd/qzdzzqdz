@@ -25,29 +25,21 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 flex flex-col items-center justify-center">
-        <div className="text-center max-w-3xl mx-auto animate-fade-in-up">
-          {/* Subtle badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 bg-secondary/20 backdrop-blur-sm mb-8">
-            <Sparkles size={14} className="text-primary" />
-            <span className="text-xs font-medium text-muted-foreground">The smarter way to build on Roblox</span>
-          </div>
-
+        <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
           {/* Main title */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
-            Your AI Assistant
-            <br />
-            <span className="gradient-text">for Roblox</span>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight text-white">
+            PinIA
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-12 leading-relaxed max-w-2xl mx-auto">
-            Expert guidance on scripting, game design, and optimization. Available whenever you need it.
+          <p className="text-xl sm:text-2xl text-white/90 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
+            AI assistant for Roblox creators
           </p>
 
           {/* CTA - subtle */}
           <Link
             to="/chat"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium group"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 font-medium group"
           >
             Start chatting
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
