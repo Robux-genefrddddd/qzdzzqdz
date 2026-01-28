@@ -262,8 +262,8 @@ export const LogoLoop = memo(
         }
       } else if (sequenceWidth > 0) {
         setSeqWidth(Math.ceil(sequenceWidth));
-        // Ensure we have enough copies for seamless infinite loop
-        const copiesNeeded = Math.ceil((containerWidth * 2) / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
+        // Ensure we have many copies for seamless infinite loop (no visible resets)
+        const copiesNeeded = Math.ceil((containerWidth * 3) / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
         setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
       }
     }, [isVertical]);
