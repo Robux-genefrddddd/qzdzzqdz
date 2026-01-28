@@ -130,7 +130,15 @@ export default function Index() {
                 href: "https://nodejs.org",
               },
             ]}
-            speed="slow"
+            direction="left"
+            speed={50}
+            logoHeight={40}
+            gap={40}
+            hoverSpeed={0}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="#040404"
+            ariaLabel="Technology stack"
           />
         </div>
       </section>
