@@ -106,7 +106,7 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
-    const seqSize = isVertical ? seqHeightRef.current : seqWidthRef.current;
+    let seqSize = isVertical ? seqHeightRef.current : seqWidthRef.current;
 
     if (seqSize > 0) {
       offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
