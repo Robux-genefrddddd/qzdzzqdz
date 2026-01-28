@@ -58,18 +58,18 @@ export default function LogoLoop({
             href={logo.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 flex items-center justify-center transition-all duration-300 group"
+            className="flex-shrink-0 flex items-center justify-center transition-all duration-500 group"
             title={logo.title}
           >
             {logo.node ? (
-              <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
+              <div className="text-2xl group-hover:scale-110 transition-transform duration-500">
                 {logo.node}
               </div>
             ) : logo.src ? (
               <img
                 src={logo.src}
                 alt={logo.alt || logo.title}
-                className="h-8 object-contain group-hover:scale-110 transition-transform duration-300"
+                className="h-6 object-contain group-hover:scale-105 transition-transform duration-500"
               />
             ) : null}
             <span className="text-xs text-muted-foreground ml-2 hidden group-hover:block">
