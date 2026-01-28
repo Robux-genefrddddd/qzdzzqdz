@@ -36,7 +36,7 @@ export default function LogoLoop({
       aria-label="Technology logos"
     >
       <div
-        className={`flex gap-8 items-center ${
+        className={`flex gap-6 items-center ${
           isVertical
             ? "flex-col animate-scroll-vertical"
             : "animate-scroll-horizontal"
