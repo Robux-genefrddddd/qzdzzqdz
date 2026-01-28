@@ -98,6 +98,9 @@
   user-select: none;
   pointer-events: none;
   flex-shrink: 0;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scale on hover effect */
