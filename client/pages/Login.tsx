@@ -25,28 +25,8 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left side - Animated background */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden items-center justify-center">
-        {/* Animated gradient orbs */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
-        <div className="absolute top-40 right-20 w-72 h-72 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-8">
-          <h1 className="text-5xl font-bold text-white mb-4 animate-fade-in-up">
-            Welcome to
-            <br />
-            <span className="gradient-text">RobloxAI</span>
-          </h1>
-          <p className="text-xl text-slate-300 animate-fade-in-up animation-delay-200">
-            Your AI assistant for Roblox game development
-          </p>
-        </div>
-      </div>
-
-      {/* Right side - Login form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-12">
+      {/* Login form */}
+      <div className="w-full flex flex-col justify-center px-6 sm:px-8 lg:px-12">
         <div className="w-full max-w-md mx-auto">
           {/* Logo for mobile */}
           <div className="lg:hidden mb-8 text-center">
