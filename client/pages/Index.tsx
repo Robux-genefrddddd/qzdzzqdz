@@ -56,57 +56,50 @@ export default function Index() {
       </section>
 
       {/* Features Section */}
-      <section className="border-t border-border py-16 sm:py-24 bg-secondary/10">
+      <section className="border-t border-border/30 py-20 sm:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Powerful Features</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to develop, optimize, and launch successful Roblox games
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {/* Feature 1 */}
-            <div className="p-6 sm:p-8 rounded-lg border border-border glass hover:glass-dark transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Code2 className="text-primary" size={24} />
+            <div className="group">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <Code2 className="text-primary" size={20} />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Lua Scripting Guide</h3>
-              <p className="text-muted-foreground">
-                Expert guidance on writing optimized Lua scripts for Roblox games
+              <h3 className="font-semibold text-sm mb-2">Scripting</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Optimized Lua patterns and best practices for Roblox development
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="p-6 sm:p-8 rounded-lg border border-border glass hover:glass-dark transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Zap className="text-primary" size={24} />
+            <div className="group">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <Zap className="text-primary" size={20} />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Performance Tips</h3>
-              <p className="text-muted-foreground">
-                Optimize your game's performance with best practices and architecture advice
+              <h3 className="font-semibold text-sm mb-2">Performance</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Optimization strategies and architecture guidance
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="p-6 sm:p-8 rounded-lg border border-border glass hover:glass-dark transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Cpu className="text-primary" size={24} />
+            <div className="group">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <Cpu className="text-primary" size={20} />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Game Architecture</h3>
-              <p className="text-muted-foreground">
-                Learn scalable design patterns and architecture for complex Roblox projects
+              <h3 className="font-semibold text-sm mb-2">Design</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Game mechanics and system design for scalability
               </p>
             </div>
 
             {/* Feature 4 */}
-            <div className="p-6 sm:p-8 rounded-lg border border-border glass hover:glass-dark transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <MessageSquare className="text-primary" size={24} />
+            <div className="group">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <MessageSquare className="text-primary" size={20} />
               </div>
-              <h3 className="text-lg font-semibold mb-2">24/7 Availability</h3>
-              <p className="text-muted-foreground">
-                Get instant answers whenever you need help with your Roblox projects
+              <h3 className="font-semibold text-sm mb-2">Support</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Instant answers available whenever you need help
               </p>
             </div>
           </div>
