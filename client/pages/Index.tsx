@@ -14,15 +14,15 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Navigation */}
-      <nav className="border-b border-border/30 backdrop-blur-md sticky top-0 z-40 bg-background/40">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <nav className="border-b border-border/20 backdrop-blur-md sticky top-0 z-40 bg-background/40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="text-xl font-bold gradient-text">PinIA</div>
+            <div className="text-lg font-semibold gradient-text">PinIA</div>
           </Link>
           <div className="flex gap-3">
             <Link
               to="/login"
-              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="px-4 py-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Sign in
             </Link>
