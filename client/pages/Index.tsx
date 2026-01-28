@@ -106,15 +106,12 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Tech Stack Section */}
-      <section className="border-t border-border py-16 sm:py-24">
+      {/* Tech Stack Section - minimal */}
+      <section className="border-t border-border/30 py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Built with Modern Tech</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Enterprise-grade technology powering intelligent assistance
-            </p>
-          </div>
+          <p className="text-center text-xs font-medium text-muted-foreground uppercase tracking-wide mb-12">
+            Built on modern, open-source technology
+          </p>
 
           <LogoLoop
             logos={[
@@ -145,22 +142,6 @@ export default function Index() {
             ]}
             speed="slow"
           />
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="border-t border-border py-16 sm:py-24 bg-secondary/10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to build something amazing?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join thousands of Roblox developers using RobloxAI to create better games faster.
-          </p>
-          <Link
-            to="/register"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 font-medium"
-          >
-            Get Started for Free <ArrowRight size={20} />
-          </Link>
         </div>
       </section>
 
