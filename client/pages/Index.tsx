@@ -136,8 +136,6 @@ export default function Index() {
             gap={40}
             pauseOnHover
             scaleOnHover
-            fadeOut
-            fadeOutColor="#040404"
             ariaLabel="Technology stack"
           />
         </div>
