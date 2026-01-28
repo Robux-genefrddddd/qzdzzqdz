@@ -114,7 +114,7 @@ const useAnimationLoop = (
         lastTimestampRef.current = timestamp;
       }
 
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
+      const deltaTime = Math.min(0.016, (timestamp - lastTimestampRef.current) / 1000); // Cap at ~60fps
       lastTimestampRef.current = timestamp;
 
       // Use refs instead of state variables to avoid stale closures
@@ -126,9 +126,14 @@ const useAnimationLoop = (
       velocityRef.current += (target - velocityRef.current) * easingFactor;
 
       if (seqSize > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
-        offsetRef.current = nextOffset;
+        offsetRef.current += velocityRef.current * deltaTime;
+
+        // Keep offset within bounds without visible jumps
+        if (offsetRef.current >= seqSize) {
+          offsetRef.current -= seqSize;
+        } else if (offsetRef.current < 0) {
+          offsetRef.current += seqSize;
+        }
 
         const transformValue = isVertical
           ? `translate3d(0, ${-offsetRef.current}px, 0)`
