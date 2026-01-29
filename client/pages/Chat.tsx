@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Menu, X, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowUp, Menu, X, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
@@ -78,24 +78,24 @@ export default function Chat() {
       </div>
 
       {/* Sidebar */}
-      <div className="relative z-10">
+      <div className="relative z-50">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       </div>
 
       {/* Main chat area */}
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="flex-1 flex flex-col relative z-0">
         {/* Header */}
-        <header className="border-b border-gray-800/30 backdrop-blur-sm py-4 px-4 sm:px-6 flex items-center justify-between bg-black/50">
+        <header className="border-b border-gray-800/30 backdrop-blur-md py-4 px-4 sm:px-6 flex items-center justify-between bg-gradient-to-b from-black/80 to-black/40">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 hover:bg-gray-900 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-gray-900/60 text-gray-400 hover:text-cyan-400 rounded-lg transition-all duration-200"
           >
             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <h1 className="text-lg font-semibold text-white flex-1 text-center lg:text-left">
             Chat with PinIA
           </h1>
-          <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-black font-semibold text-sm flex-shrink-0">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-200">
             U
           </div>
         </header>
@@ -118,34 +118,63 @@ export default function Chat() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex animate-fade-in-up ${
+                  className={`flex animate-fade-in-up gap-2.5 ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  <div
-                    className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-lg ${
-                      message.sender === "user"
-                        ? "bg-cyan-600 text-white rounded-br-none"
-                        : "bg-gray-900 text-white rounded-bl-none border border-gray-800"
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed">{message.text}</p>
-                    <span className="text-xs opacity-70 mt-1 block">
-                      {message.timestamp.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
+                  {message.sender === "ai" && (
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
+                        P
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1">
+                    {message.sender === "ai" && (
+                      <span className="text-xs text-gray-400 ml-1">PinIA</span>
+                    )}
+                    <div
+                      className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-2xl transition-all duration-200 ${
+                        message.sender === "user"
+                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                          : "bg-gradient-to-br from-gray-800/50 to-gray-900/50 text-white rounded-bl-none border border-gray-700/50 hover:border-gray-600/50 backdrop-blur-sm"
+                      }`}
+                    >
+                      <p className="text-sm leading-relaxed">{message.text}</p>
+                      <span
+                        className={`text-xs mt-2 block font-medium ${message.sender === "user" ? "opacity-75" : "opacity-60 text-gray-400"}`}
+                      >
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                    </div>
                   </div>
+                  {message.sender === "user" && (
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
+                        U
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
               {isLoading && (
-                <div className="flex justify-start animate-fade-in-up">
-                  <div className="bg-gray-900 text-white rounded-lg rounded-bl-none border border-gray-800 px-4 py-3">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                <div className="flex justify-start animate-fade-in-up gap-2">
+                  <div className="flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                      P
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs text-gray-400 ml-0.5">PinIA</span>
+                    <div className="bg-gray-900/80 text-white rounded-xl rounded-bl-none border border-gray-800/50 px-4 py-3">
+                      <div className="flex gap-1.5">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -158,13 +187,13 @@ export default function Chat() {
         {/* Input area */}
         <div className="border-t border-gray-800/30 bg-black/50 p-4 sm:p-6 backdrop-blur-sm">
           <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto">
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Message PinIA... (Shift + Enter for new line)"
+                placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"
+                className="flex-1 px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-xl text-white placeholder:text-gray-500 resize-none focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -175,38 +204,35 @@ export default function Chat() {
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0"
+                className="px-3 py-2.5 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-95 group"
                 title="Send message (Enter)"
               >
-                <Send size={20} />
+                <ArrowUp
+                  size={16}
+                  className="group-hover:-translate-y-0.5 transition-transform duration-200"
+                />
               </button>
             </div>
-            <p className="text-xs text-gray-500 mt-2">
-              PinIA can make mistakes. Please verify important information.
-            </p>
           </form>
         </div>
       </div>
 
       {/* Auth Modal */}
       {showAuthPrompt && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 max-w-md w-full animate-fade-in-up">
-            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-cyan-500/10 mb-6">
-              <Sparkles className="text-cyan-400" size={24} />
-            </div>
-
-            <h2 className="text-2xl font-semibold text-white mb-2">
-              Sign in to continue
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-b from-gray-950 to-black border border-gray-800/50 rounded-2xl p-6 max-w-sm w-full animate-fade-in-up shadow-2xl">
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+              Ready to chat?
             </h2>
-            <p className="text-gray-400 mb-8">
-              Create an account to start chatting with PinIA.
+            <p className="text-gray-400 mb-6 text-center text-xs leading-relaxed">
+              Sign in to unlock the full potential of PinIA and start building
+              amazing Roblox games.
             </p>
 
-            <div className="space-y-3 mb-6">
+            <div className="space-y-2 mb-4">
               <Link
                 to="/register"
-                className="block w-full py-3 px-4 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors text-center font-medium"
+                className="block w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 text-center font-medium text-sm shadow-lg hover:shadow-cyan-500/25 active:scale-95"
               >
                 Create Account
               </Link>
@@ -215,17 +241,17 @@ export default function Chat() {
                   setShowAuthPrompt(false);
                   setIsAuthenticated(true);
                 }}
-                className="block w-full py-3 px-4 border border-gray-800 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                className="block w-full py-2.5 px-4 border border-gray-700 text-white rounded-lg hover:bg-gray-900/50 hover:border-gray-600 transition-all duration-200 font-medium text-sm"
               >
-                Demo (No signup)
+                Sign In
               </button>
             </div>
 
             <button
               onClick={() => setShowAuthPrompt(false)}
-              className="w-full py-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="w-full py-2 text-xs text-gray-400 hover:text-gray-200 transition-colors"
             >
-              Maybe later
+              Continue as Guest
             </button>
           </div>
         </div>

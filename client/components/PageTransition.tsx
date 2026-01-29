@@ -3,31 +3,29 @@ import { useLocation } from "react-router-dom";
 
 export default function PageTransition() {
   const location = useLocation();
-  const [displayTransition, setDisplayTransition] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Déclencher l'animation au changement de route
-    setDisplayTransition(true);
+    // Déclencher la transition
+    setIsTransitioning(true);
 
-    // Garder l'overlay pendant toute l'animation (0.8s total)
+    // Masquer l'overlay après 300ms
     const timer = setTimeout(() => {
-      setDisplayTransition(false);
-    }, 800);
+      setIsTransitioning(false);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
+  if (!isTransitioning) return null;
+
   return (
-    <>
-      {displayTransition && (
-        <div
-          className="fixed inset-0 bg-black pointer-events-none z-50"
-          style={{
-            animation:
-              "transitionWipeComplete 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
-          }}
-        />
-      )}
-    </>
+    <div
+      className="fixed inset-0 bg-black pointer-events-none z-50"
+      style={{
+        animation:
+          "fadeIn 0.15s ease-in forwards, fadeOut 0.15s ease-out 0.15s forwards",
+      }}
+    />
   );
 }

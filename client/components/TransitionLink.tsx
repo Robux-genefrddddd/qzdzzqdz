@@ -17,10 +17,11 @@ export default function TransitionLink({
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    // Navigate au moment exact où l'écran noir recouvre tout (50% de l'animation = 0.4s)
+    // Navigate au moment où le fade-out est terminé (0.15s)
+    // et avant le fade-in (0.15s delay + 0.4s duration)
     setTimeout(() => {
       navigate(to);
-    }, 400);
+    }, 150);
   };
 
   return (

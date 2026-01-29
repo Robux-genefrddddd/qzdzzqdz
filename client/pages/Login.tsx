@@ -4,24 +4,36 @@ import { Mail, Lock, Github } from "lucide-react";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
 import TransitionLink from "@/components/TransitionLink";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     setIsLoading(true);
-    setTimeout(() => {
-      navigate("/chat");
-    }, 500);
+
+    try {
+      await signIn(email, password);
+      // Redirect to chat after successful login
+      setTimeout(() => {
+        navigate("/chat");
+      }, 500);
+    } catch (err: any) {
+      setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   const handleOAuthLogin = (provider: string) => {
     console.log(`Logging in with ${provider}`);
-    navigate("/chat");
+    // TODO: Implement OAuth with Firebase
   };
 
   return (

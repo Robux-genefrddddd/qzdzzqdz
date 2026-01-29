@@ -4,9 +4,11 @@ import { Mail, Lock, User, Github, Check } from "lucide-react";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
 import TransitionLink from "@/components/TransitionLink";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { signUp } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,7 +48,7 @@ export default function Register() {
     setError("");
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -60,10 +62,22 @@ export default function Register() {
       return;
     }
 
+    if (!formData.name.trim()) {
+      setError("Name is required");
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
-      navigate("/chat");
-    }, 500);
+    try {
+      await signUp(formData.email, formData.password, formData.name);
+      // Redirect to chat after successful signup
+      setTimeout(() => {
+        navigate("/chat");
+      }, 500);
+    } catch (err: any) {
+      setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   const handleOAuthRegister = (provider: string) => {
