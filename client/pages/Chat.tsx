@@ -143,7 +143,7 @@ export default function Chat() {
             Chat with PinIA
           </h1>
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-200">
-            U
+            {user?.email?.charAt(0).toUpperCase() || "U"}
           </div>
         </header>
 
