@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Send, Bug, Lightbulb, MessageSquare, AlertCircle, CheckCircle, Clock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
