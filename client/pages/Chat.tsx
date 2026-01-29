@@ -202,10 +202,10 @@ export default function Chat() {
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="px-3 py-2.5 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/20 active:scale-95 group"
+                className="px-3 py-2.5 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-95 group"
                 title="Send message (Enter)"
               >
-                <Send size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                <ArrowUp size={16} className="group-hover:-translate-y-0.5 transition-transform duration-200" />
               </button>
             </div>
           </form>
