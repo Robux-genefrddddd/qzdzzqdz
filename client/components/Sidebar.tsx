@@ -1,11 +1,15 @@
 import { useState } from "react";
 import {
-  Menu,
+  ChevronLeft,
   Plus,
   Search,
   Settings,
   LogOut,
   MessageCircle,
+  MoreVertical,
+  Trash2,
+  Share2,
+  Clock,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -29,114 +33,128 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
       {/* Mobile overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
           onClick={onClose}
         />
       )}
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300 z-50 flex flex-col ${
+        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-gray-950 to-black border-r border-gray-800/50 transition-all duration-300 z-50 flex flex-col ${
           isCollapsed ? "w-20" : "w-64"
         } ${!isOpen && "max-lg:-translate-x-full"}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
+        <div className="flex items-center justify-between p-4 border-b border-gray-800/30">
           {!isCollapsed && (
-            <Link to="/" className="font-bold text-lg gradient-text">
+            <Link to="/" className="font-bold text-lg gradient-text hover:opacity-80 transition-opacity">
               PinIA
             </Link>
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-1 hover:bg-sidebar-accent rounded-md transition-colors"
+            className="p-2 hover:bg-gray-900/60 rounded-lg transition-all duration-200 text-gray-400 hover:text-cyan-400"
             title={isCollapsed ? "Expand" : "Collapse"}
           >
-            <Menu size={20} className="text-sidebar-foreground" />
+            <ChevronLeft size={20} className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`} />
           </button>
         </div>
 
         {/* New Chat Button */}
-        <div className="p-4 border-b border-sidebar-border">
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground hover:opacity-90 transition-opacity font-medium">
-            <Plus size={20} />
+        <div className="p-4 border-b border-gray-800/30">
+          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 font-medium text-sm shadow-lg hover:shadow-cyan-500/25 active:scale-95">
+            <Plus size={18} />
             {!isCollapsed && "New Chat"}
           </button>
         </div>
 
         {/* Search */}
         {!isCollapsed && (
-          <div className="p-4 border-b border-sidebar-border">
+          <div className="p-4 border-b border-gray-800/30">
             <div className="relative">
               <Search
-                size={18}
-                className="absolute left-3 top-2.5 text-sidebar-foreground/40"
+                size={16}
+                className="absolute left-3 top-3 text-gray-500"
               />
               <input
                 type="text"
-                placeholder="Search chats..."
-                className="w-full pl-10 pr-4 py-2 bg-sidebar-accent border border-sidebar-border rounded-lg text-sidebar-foreground text-sm placeholder:text-sidebar-foreground/40 focus:outline-none focus:ring-2 focus:ring-sidebar-primary"
+                placeholder="Search..."
+                className="w-full pl-9 pr-3 py-2 bg-gray-900/50 border border-gray-800 rounded-lg text-gray-300 text-sm placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
               />
             </div>
           </div>
         )}
 
         {/* Chat History */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2">
-          <p className="text-xs font-semibold text-sidebar-foreground/60 uppercase px-2 mb-3">
-            {!isCollapsed && "Chat History"}
-          </p>
+        <div className="flex-1 overflow-y-auto p-3 space-y-1">
+          {!isCollapsed && (
+            <p className="text-xs font-semibold text-gray-500 uppercase px-3 mb-3 tracking-wider">
+              Recent
+            </p>
+          )}
           {chatHistory.map((chat) => (
-            <button
+            <div
               key={chat.id}
-              className="w-full text-left px-3 py-2 rounded-lg hover:bg-sidebar-accent transition-colors group"
+              className="group relative"
             >
-              <div className="flex items-start gap-2">
-                <MessageCircle
-                  size={16}
-                  className="mt-1 text-sidebar-foreground/60 flex-shrink-0"
-                />
-                {!isCollapsed && (
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-sidebar-foreground truncate group-hover:text-sidebar-primary-foreground">
-                      {chat.title}
-                    </p>
-                    <p className="text-xs text-sidebar-foreground/40">
-                      {chat.date}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </button>
+              <button
+                className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100"
+              >
+                <div className="flex items-start gap-2.5">
+                  <MessageCircle
+                    size={16}
+                    className="mt-1 text-gray-600 group-hover:text-cyan-500 flex-shrink-0 transition-colors duration-200"
+                  />
+                  {!isCollapsed && (
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-300 truncate group-hover:text-gray-100">
+                        {chat.title}
+                      </p>
+                      <div className="flex items-center gap-1 mt-1">
+                        <Clock size={12} className="text-gray-600" />
+                        <p className="text-xs text-gray-500">
+                          {chat.date}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </button>
+              {!isCollapsed && (
+                <button className="absolute right-2 top-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-gray-800 rounded text-gray-500 hover:text-gray-300">
+                  <MoreVertical size={16} />
+                </button>
+              )}
+            </div>
           ))}
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-sidebar-border p-4 space-y-2">
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/80 hover:text-sidebar-foreground">
-            <Settings size={20} />
+        <div className="border-t border-gray-800/30 p-3 space-y-1">
+          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
+            <Settings size={18} className="transition-transform duration-200 group-hover:rotate-90" />
             {!isCollapsed && <span className="text-sm">Settings</span>}
           </button>
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/80 hover:text-sidebar-foreground">
-            <LogOut size={20} />
+          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-red-400">
+            <LogOut size={18} />
             {!isCollapsed && <span className="text-sm">Sign Out</span>}
           </button>
 
           {!isCollapsed && (
-            <div className="pt-2 border-t border-sidebar-border">
-              <div className="flex items-center gap-3 px-3 py-2">
-                <div className="w-8 h-8 rounded-full bg-sidebar-primary flex items-center justify-center text-sidebar-primary-foreground font-semibold text-sm">
+            <div className="pt-2 border-t border-gray-800/30">
+              <button className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-900/40 rounded-lg transition-all duration-200">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
                   U
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-sidebar-foreground truncate">
+                <div className="flex-1 min-w-0 text-left">
+                  <p className="text-sm font-medium text-gray-300 truncate">
                     User
                   </p>
-                  <p className="text-xs text-sidebar-foreground/50 truncate">
+                  <p className="text-xs text-gray-500 truncate">
                     user@example.com
                   </p>
                 </div>
-              </div>
+              </button>
             </div>
           )}
         </div>
