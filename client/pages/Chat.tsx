@@ -78,11 +78,10 @@ export default function Chat() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || !user) return;
 
-    if (!isAuthenticated) {
-      setShowAuthPrompt(true);
-      return;
+    if (!currentChatId) {
+      await saveNewChat(input.slice(0, 50) + (input.length > 50 ? "..." : ""));
     }
 
     const userMessage: Message = {
@@ -93,10 +92,11 @@ export default function Chat() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    await saveMessage(userMessage);
     setInput("");
     setIsLoading(true);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       const aiMessage: Message = {
         id: Math.random().toString(),
         text: `Thanks for asking about "${input}". This is a simulated response from PinIA. In a production environment, this would be connected to an actual AI service to provide expert guidance on Roblox game development.`,
@@ -104,6 +104,9 @@ export default function Chat() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
+      if (currentChatId) {
+        await saveMessage(aiMessage);
+      }
       setIsLoading(false);
     }, 1000);
   };
