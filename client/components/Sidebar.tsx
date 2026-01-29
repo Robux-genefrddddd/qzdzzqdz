@@ -63,7 +63,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         </div>
 
         {/* New Chat Button */}
-        <div className="p-4 border-b border-gray-800/30">
+        <div className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-3" : "p-4"}`}>
           <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 font-medium text-sm shadow-lg hover:shadow-cyan-500/25 active:scale-95">
             <Plus size={18} />
             {!isCollapsed && "New Chat"}
