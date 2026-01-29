@@ -254,9 +254,42 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 </div>
               </button>
               {!isCollapsed && (
-                <button className="absolute right-2 top-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-gray-800 rounded text-gray-500 hover:text-gray-300">
-                  <MoreVertical size={14} />
-                </button>
+                <div className="absolute right-2 top-1.5">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenMenuId(openMenuId === chat.id ? null : chat.id);
+                    }}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-gray-800 rounded text-gray-500 hover:text-gray-300"
+                  >
+                    <MoreVertical size={14} />
+                  </button>
+                  {openMenuId === chat.id && (
+                    <div className="absolute right-0 top-full mt-1 bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-50">
+                      <button
+                        onClick={() => openRenameModal(chat.id, chat.title)}
+                        className="w-full text-left px-3 py-2 text-xs text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-colors rounded-t-lg flex items-center gap-2"
+                      >
+                        <MessageCircle size={12} />
+                        Rename
+                      </button>
+                      <button
+                        onClick={() => handleShareChat(chat.id, chat.title)}
+                        className="w-full text-left px-3 py-2 text-xs text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-colors flex items-center gap-2"
+                      >
+                        <Share2 size={12} />
+                        Share
+                      </button>
+                      <button
+                        onClick={() => handleDeleteChat(chat.id)}
+                        className="w-full text-left px-3 py-2 text-xs text-gray-300 hover:text-red-400 hover:bg-red-900/20 transition-colors rounded-b-lg flex items-center gap-2"
+                      >
+                        <Trash2 size={12} />
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           ))}
