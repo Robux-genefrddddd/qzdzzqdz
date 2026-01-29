@@ -121,7 +121,7 @@ export default function Chat() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    await saveMessage(userMessage);
+    await saveMessage(userMessage, chatId);
     setInput("");
     setIsLoading(true);
     setTypingUsername("PinIA");
