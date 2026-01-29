@@ -72,25 +72,25 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
 
         {/* Search */}
         {!isCollapsed && (
-          <div className="p-4 border-b border-gray-800/30">
+          <div className="p-3 border-b border-gray-800/30">
             <div className="relative">
               <Search
-                size={16}
-                className="absolute left-3 top-3 text-gray-500"
+                size={14}
+                className="absolute left-2.5 top-2 text-gray-500"
               />
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full pl-9 pr-3 py-2 bg-gray-900/50 border border-gray-800 rounded-lg text-gray-300 text-sm placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
+                className="w-full pl-8 pr-2.5 py-1.5 bg-gray-900/50 border border-gray-800 rounded-lg text-gray-300 text-xs placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
               />
             </div>
           </div>
         )}
 
         {/* Chat History */}
-        <div className="flex-1 overflow-y-auto p-3 space-y-1">
+        <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
           {!isCollapsed && (
-            <p className="text-xs font-semibold text-gray-500 uppercase px-3 mb-3 tracking-wider">
+            <p className="text-xs font-semibold text-gray-500 uppercase px-2 mb-2 tracking-wider">
               Recent
             </p>
           )}
@@ -100,20 +100,20 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
               className="group relative"
             >
               <button
-                className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100"
+                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100"
               >
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <MessageCircle
-                    size={16}
-                    className="mt-1 text-gray-600 group-hover:text-cyan-500 flex-shrink-0 transition-colors duration-200"
+                    size={14}
+                    className="mt-0.5 text-gray-600 group-hover:text-cyan-500 flex-shrink-0 transition-colors duration-200"
                   />
                   {!isCollapsed && (
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-gray-300 truncate group-hover:text-gray-100">
+                      <p className="text-xs text-gray-300 truncate group-hover:text-gray-100">
                         {chat.title}
                       </p>
-                      <div className="flex items-center gap-1 mt-1">
-                        <Clock size={12} className="text-gray-600" />
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <Clock size={10} className="text-gray-600" />
                         <p className="text-xs text-gray-500">
                           {chat.date}
                         </p>
@@ -123,8 +123,8 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 </div>
               </button>
               {!isCollapsed && (
-                <button className="absolute right-2 top-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-gray-800 rounded text-gray-500 hover:text-gray-300">
-                  <MoreVertical size={16} />
+                <button className="absolute right-2 top-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-gray-800 rounded text-gray-500 hover:text-gray-300">
+                  <MoreVertical size={14} />
                 </button>
               )}
             </div>
