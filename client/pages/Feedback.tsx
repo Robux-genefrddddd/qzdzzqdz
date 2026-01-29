@@ -86,102 +86,115 @@ export default function Feedback() {
 
         {/* Content */}
         <div className="flex-1 p-6 overflow-y-auto">
-          <div className="max-w-2xl mx-auto">
-            <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-2">Send us your feedback</h2>
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold mb-2">Help & Feedback</h2>
               <p className="text-gray-400">
-                Help us improve PinIA by sharing your suggestions, reporting bugs,
-                or asking for new features.
+                Help us improve PinIA by sharing your feedback and suggestions
               </p>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 p-6 rounded-lg bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50"
-            >
-              {/* Feedback Type */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Feedback Type
-                </label>
-                <select
-                  value={feedbackType}
-                  onChange={(e) => setFeedbackType(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Form Section */}
+              <div className="lg:col-span-2">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 p-8 rounded-2xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 backdrop-blur-sm"
                 >
-                  <option value="bug">Bug Report</option>
-                  <option value="feature">Feature Request</option>
-                  <option value="suggestion">Suggestion</option>
-                  <option value="other">Other</option>
-                </select>
+                  {/* Feedback Type */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3 flex items-center gap-2">
+                      <MessageSquare size={16} className="text-cyan-400" />
+                      Feedback Type
+                    </label>
+                    <select
+                      value={feedbackType}
+                      onChange={(e) => setFeedbackType(e.target.value)}
+                      className="w-full px-4 py-3 bg-gray-900/60 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    >
+                      <option value="bug">🐛 Bug Report</option>
+                      <option value="feature">✨ Feature Request</option>
+                      <option value="suggestion">💡 Suggestion</option>
+                      <option value="other">📝 Other</option>
+                    </select>
+                  </div>
+
+                  {/* Title */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3">Title</label>
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Brief description of your feedback"
+                      className="w-full px-4 py-3 bg-gray-900/60 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    />
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3">
+                      Description
+                    </label>
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Please provide detailed information..."
+                      rows={6}
+                      className="w-full px-4 py-3 bg-gray-900/60 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 resize-none focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-cyan-500/25 active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    <Send size={18} />
+                    {isSubmitting ? "Submitting..." : "Submit Feedback"}
+                  </button>
+                </form>
               </div>
 
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium mb-2">Title</label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Brief description of your feedback"
-                  className="w-full px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                />
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Description
-                </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Please provide detailed information..."
-                  rows={6}
-                  className="w-full px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 resize-none focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95"
-              >
-                {isSubmitting ? "Submitting..." : "Submit Feedback"}
-              </button>
-            </form>
-
-            {/* FAQ Section */}
-            <div className="mt-12">
-              <h3 className="text-lg font-semibold mb-4">Frequently Asked Questions</h3>
+              {/* Info Section */}
               <div className="space-y-4">
-                <div className="p-4 rounded-lg bg-gray-900/20 border border-gray-800/30">
-                  <h4 className="font-medium text-cyan-400 mb-2">
-                    How long does it take to get a response?
-                  </h4>
-                  <p className="text-sm text-gray-400">
-                    We review all feedback within 24-48 hours and will respond to
-                    critical issues sooner.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-gray-900/20 border border-gray-800/30">
-                  <h4 className="font-medium text-cyan-400 mb-2">
-                    Can I track the status of my feedback?
-                  </h4>
-                  <p className="text-sm text-gray-400">
-                    Yes, we'll update you via email about the status of your
-                    submitted feedback.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-gray-900/20 border border-gray-800/30">
-                  <h4 className="font-medium text-cyan-400 mb-2">
-                    What if I want to report a security issue?
-                  </h4>
-                  <p className="text-sm text-gray-400">
-                    Please mark it as urgent and provide as much detail as
-                    possible. We take security seriously.
-                  </p>
+                {/* FAQ Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <AlertCircle size={18} className="text-yellow-400" />
+                    FAQ
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-blue-900/20 to-blue-950/20 border border-blue-800/30 hover:border-blue-500/30 transition-all duration-200">
+                      <h4 className="font-semibold text-blue-400 mb-2 flex items-center gap-2">
+                        <Clock size={14} />
+                        Response Time
+                      </h4>
+                      <p className="text-xs text-gray-400">
+                        We review feedback within 24-48 hours.
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-green-900/20 to-green-950/20 border border-green-800/30 hover:border-green-500/30 transition-all duration-200">
+                      <h4 className="font-semibold text-green-400 mb-2 flex items-center gap-2">
+                        <CheckCircle size={14} />
+                        Tracking
+                      </h4>
+                      <p className="text-xs text-gray-400">
+                        Get email updates on your feedback status.
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-red-900/20 to-red-950/20 border border-red-800/30 hover:border-red-500/30 transition-all duration-200">
+                      <h4 className="font-semibold text-red-400 mb-2 flex items-center gap-2">
+                        <AlertCircle size={14} />
+                        Security
+                      </h4>
+                      <p className="text-xs text-gray-400">
+                        Mark urgent security issues clearly.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
