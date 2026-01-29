@@ -54,6 +54,9 @@ export default function Chat() {
 
   useEffect(() => {
     const handleChatNavigation = async () => {
+      // Wait for auth to be loaded before accessing Firestore
+      if (authLoading) return;
+
       const newParam = searchParams.get("new");
       const chatParam = searchParams.get("chat");
 
@@ -98,15 +101,29 @@ export default function Chat() {
             currentChatIdRef.current = chatParam;
             setCurrentChatId(chatParam);
             setInput("");
+          } else {
+            // Chat not found, reset
+            currentChatIdRef.current = "";
+            setCurrentChatId("");
+            navigate("/chat?new=true", { replace: true });
           }
         } catch (error) {
           console.error("Error loading chat:", error);
+          // On error, show initial state
+          setMessages([
+            {
+              id: "1",
+              text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+              sender: "ai",
+              timestamp: new Date(),
+            },
+          ]);
         }
       }
     };
 
     handleChatNavigation();
-  }, [searchParams, user, navigate]);
+  }, [searchParams, user, authLoading, navigate]);
 
   const saveNewChat = async (title: string) => {
     if (!user) return null;
