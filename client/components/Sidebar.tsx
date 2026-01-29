@@ -132,7 +132,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800/30 p-3 space-y-1">
+        <div className={`border-t border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2 space-y-2" : "p-3 space-y-1"}`}>
           {!isCollapsed && (
             <>
               <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
