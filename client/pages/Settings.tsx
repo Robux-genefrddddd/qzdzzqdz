@@ -111,18 +111,35 @@ export default function Settings() {
 
         {/* Content */}
         <div className="flex-1 p-6 overflow-y-auto">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto">
+            {/* Header Section */}
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold mb-2">Settings</h2>
+              <p className="text-gray-400">Manage your account preferences and settings</p>
+            </div>
+
             {/* Account Section */}
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Account</h2>
-              <div className="p-6 rounded-lg bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 space-y-4">
-                <div>
-                  <p className="text-sm text-gray-400 mb-1">Email Address</p>
-                  <p className="font-medium">{authUser?.email}</p>
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20">
+                  <Lock size={20} className="text-cyan-400" />
                 </div>
-                <div className="pt-4 border-t border-gray-700/30">
-                  <p className="text-sm text-gray-400 mb-2">Account Created</p>
-                  <p className="font-medium">
+                <h3 className="text-xl font-semibold">Account</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Mail size={16} className="text-cyan-400" />
+                    <p className="text-sm text-gray-400">Email Address</p>
+                  </div>
+                  <p className="font-medium text-lg break-all">{authUser?.email}</p>
+                </div>
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield size={16} className="text-cyan-400" />
+                    <p className="text-sm text-gray-400">Account Created</p>
+                  </div>
+                  <p className="font-medium text-lg">
                     {authUser?.metadata?.creationTime
                       ? new Date(authUser.metadata.creationTime).toLocaleDateString()
                       : "N/A"}
