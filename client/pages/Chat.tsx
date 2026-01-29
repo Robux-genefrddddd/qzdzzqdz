@@ -281,28 +281,28 @@ export default function Chat() {
         {/* Input area */}
         <div className="border-t border-gray-800/30 bg-black/50 p-4 sm:p-6 backdrop-blur-sm">
           <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto">
-            <div className="flex gap-2">
+            <div className="flex gap-3 items-end">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me anything..."
                 rows={1}
-                className="flex-1 px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-xl text-white placeholder:text-gray-500 resize-none focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                className="flex-1 px-4 py-3 bg-gray-900/60 border border-gray-800 rounded-xl text-white placeholder:text-gray-500 resize-none focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
-                    handleSendMessage(e);
+                    handleSendMessage(e as any);
                   }
                 }}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="px-3 py-2.5 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-95 group"
+                className="px-4 py-3 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-95 group"
                 title="Send message (Enter)"
               >
                 <ArrowUp
-                  size={16}
+                  size={18}
                   className="group-hover:-translate-y-0.5 transition-transform duration-200"
                 />
               </button>
