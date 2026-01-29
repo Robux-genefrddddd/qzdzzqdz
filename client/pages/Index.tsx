@@ -55,15 +55,16 @@ export default function Index() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <StarBorder
-                as={Link}
-                to="/chat"
-                className="w-full sm:w-auto"
-                color="#00d4ff"
-                speed="5s"
-              >
-                Start Building
-              </StarBorder>
+              <GooeyButton as={Link} to="/chat">
+                <StarBorder
+                  as="span"
+                  className="w-full sm:w-auto cursor-pointer"
+                  color="#00d4ff"
+                  speed="5s"
+                >
+                  Start Building
+                </StarBorder>
+              </GooeyButton>
               <button className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
                 Learn More
                 <ArrowRight size={16} />
