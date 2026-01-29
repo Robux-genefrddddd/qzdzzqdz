@@ -189,87 +189,93 @@ export default function Chat() {
         </header>
 
         {/* Messages area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
-          {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center">
-              <div className="text-5xl mb-4">🤖</div>
-              <h2 className="text-2xl font-semibold text-white mb-2">
-                Start a new conversation
-              </h2>
-              <p className="text-gray-400 max-w-md">
-                Ask me anything about Roblox game development, scripting,
-                design, monetization, and more.
-              </p>
-            </div>
-          ) : (
-            <>
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex animate-fade-in-up gap-2.5 ${
-                    message.sender === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  {message.sender === "ai" && (
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
-                        P
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex flex-col gap-1">
+        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+          <div className="p-4 sm:p-6 max-w-4xl mx-auto w-full">
+            {messages.length === 0 ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="text-6xl mb-6 drop-shadow-lg">🤖</div>
+                <h2 className="text-3xl font-bold text-white mb-3">
+                  Start a new conversation
+                </h2>
+                <p className="text-gray-400 max-w-md leading-relaxed">
+                  Ask me anything about Roblox game development, scripting,
+                  design, monetization, and more.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`flex animate-fade-in-up gap-3 mb-2 ${
+                      message.sender === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
                     {message.sender === "ai" && (
-                      <span className="text-xs text-gray-400 ml-1">PinIA</span>
+                      <div className="flex-shrink-0 mt-0.5">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-200">
+                          P
+                        </div>
+                      </div>
                     )}
-                    <div
-                      className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-2xl transition-all duration-200 ${
-                        message.sender === "user"
-                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
-                          : "bg-gradient-to-br from-gray-800/50 to-gray-900/50 text-white rounded-bl-none border border-gray-700/50 hover:border-gray-600/50 backdrop-blur-sm"
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed">{message.text}</p>
-                      <span
-                        className={`text-xs mt-2 block font-medium ${message.sender === "user" ? "opacity-75" : "opacity-60 text-gray-400"}`}
+                    <div className="flex flex-col gap-1 max-w-xs sm:max-w-md lg:max-w-2xl">
+                      {message.sender === "ai" && (
+                        <span className="text-xs text-gray-500 font-medium px-1">PinIA</span>
+                      )}
+                      <div
+                        className={`px-4 py-3.5 rounded-2xl transition-all duration-200 backdrop-blur-sm ${
+                          message.sender === "user"
+                            ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-lg shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
+                            : "bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-gray-100 rounded-bl-lg border border-gray-700/50 hover:border-gray-600/70"
+                        }`}
                       >
-                        {message.timestamp.toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </span>
-                    </div>
-                  </div>
-                  {message.sender === "user" && (
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
-                        U
+                        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.text}</p>
+                        <span
+                          className={`text-xs mt-2 block font-medium ${
+                            message.sender === "user"
+                              ? "opacity-75 text-cyan-100"
+                              : "opacity-60 text-gray-500"
+                          }`}
+                        >
+                          {message.timestamp.toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </span>
                       </div>
                     </div>
-                  )}
-                </div>
-              ))}
-              {isLoading && typingUsername && (
-                <div className="flex justify-start animate-fade-in-up gap-2">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
-                      {typingUsername.charAt(0)}
-                    </div>
+                    {message.sender === "user" && (
+                      <div className="flex-shrink-0 mt-0.5">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-200">
+                          {user?.email?.charAt(0).toUpperCase() || "U"}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-xs text-gray-400 ml-0.5">{typingUsername} is typing...</span>
-                    <div className="bg-gray-900/80 text-white rounded-xl rounded-bl-none border border-gray-800/50 px-4 py-3">
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                ))}
+                {isLoading && typingUsername && (
+                  <div className="flex justify-start animate-fade-in-up gap-3 mb-2">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
+                        {typingUsername.charAt(0)}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-xs text-gray-500 font-medium px-1">{typingUsername} is typing...</span>
+                      <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 backdrop-blur-sm px-4 py-3.5">
+                        <div className="flex gap-1.5">
+                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
+                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </>
-          )}
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Input area */}
