@@ -209,24 +209,24 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         >
           {!isCollapsed && (
             <>
-              <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+              <Link to="/resources" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
                 <BookOpen size={16} />
                 <span className="text-xs">Resources</span>
-              </button>
-              <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+              </Link>
+              <Link to="/feedback" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
                 <HelpCircle size={16} />
                 <span className="text-xs">Help & Feedback</span>
-              </button>
+              </Link>
             </>
           )}
-          <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
+          <Link to="/settings" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
             <Settings
               size={16}
               className="transition-transform duration-200 group-hover:rotate-90"
             />
             {!isCollapsed && <span className="text-xs">Settings</span>}
-          </button>
-          <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400">
+          </Link>
+          <button onClick={handleLogout} className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400">
             <LogOut size={16} />
             {!isCollapsed && <span className="text-xs">Sign Out</span>}
           </button>
@@ -235,14 +235,14 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
             <div className="pt-2 border-t border-gray-800/30">
               <button className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-gray-900/40 rounded-lg transition-all duration-200">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
-                  U
+                  {userInitial}
                 </div>
                 <div className="flex-1 min-w-0 text-left">
                   <p className="text-xs font-medium text-gray-300 truncate">
-                    User
+                    {user?.email?.split("@")[0] || "User"}
                   </p>
                   <p className="text-xs text-gray-500 truncate">
-                    user@example.com
+                    {userEmail}
                   </p>
                 </div>
               </button>
