@@ -66,10 +66,16 @@ export default function Index() {
                   Start Building
                 </StarBorder>
               </GooeyButton>
-              <button className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
-                Learn More
-                <ArrowRight size={16} />
-              </button>
+              <GooeyButton as={Link} to="/register">
+                <StarBorder
+                  as="span"
+                  className="w-full sm:w-auto cursor-pointer"
+                  color="#00ff88"
+                  speed="5s"
+                >
+                  Get Started
+                </StarBorder>
+              </GooeyButton>
             </div>
           </div>
         </section>
