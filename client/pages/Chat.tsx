@@ -39,6 +39,7 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [currentChatId, setCurrentChatId] = useState<string>("");
   const [typingUsername, setTypingUsername] = useState<string | null>(null);
+  const currentChatIdRef = useRef<string>("");
 
   useEffect(() => {
     if (!authLoading && !user) {
