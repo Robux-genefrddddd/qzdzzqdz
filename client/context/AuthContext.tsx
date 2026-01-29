@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { auth, db } from "@/config/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -41,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       // Store user info in Firestore with creation date
@@ -72,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       setUser(userCredential.user);
     } catch (err: any) {

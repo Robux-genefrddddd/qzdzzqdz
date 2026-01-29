@@ -49,9 +49,14 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         } ${!isOpen && "max-lg:-translate-x-full"}`}
       >
         {/* Header */}
-        <div className={`flex items-center border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2 justify-center" : "p-3 justify-between"}`}>
+        <div
+          className={`flex items-center border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2 justify-center" : "p-3 justify-between"}`}
+        >
           {!isCollapsed && (
-            <Link to="/" className="font-bold text-base text-white hover:opacity-80 transition-opacity">
+            <Link
+              to="/"
+              className="font-bold text-base text-white hover:opacity-80 transition-opacity"
+            >
               PinIA
             </Link>
           )}
@@ -60,12 +65,17 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
             className="p-1.5 hover:bg-gray-900/60 rounded-lg transition-all duration-200 text-gray-400 hover:text-cyan-400 relative z-50"
             title={isCollapsed ? "Expand" : "Collapse"}
           >
-            <ChevronLeft size={18} className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`} />
+            <ChevronLeft
+              size={18}
+              className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`}
+            />
           </button>
         </div>
 
         {/* New Chat Button */}
-        <div className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2" : "p-3"}`}>
+        <div
+          className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2" : "p-3"}`}
+        >
           <button className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-cyan-500/40 hover:border-cyan-400/60 text-cyan-400 hover:text-cyan-300 transition-all duration-200 font-medium text-xs active:scale-95 hover:bg-cyan-500/10">
             <Plus size={16} />
             {!isCollapsed && "New Chat"}
@@ -79,10 +89,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
               onClick={() => setIsSearchOpen(true)}
               className="w-full relative flex items-center gap-2.5"
             >
-              <Search
-                size={14}
-                className="text-gray-500 flex-shrink-0"
-              />
+              <Search size={14} className="text-gray-500 flex-shrink-0" />
               <input
                 type="text"
                 placeholder="Search..."
@@ -104,13 +111,8 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
             </p>
           )}
           {chatHistory.map((chat) => (
-            <div
-              key={chat.id}
-              className="group relative"
-            >
-              <button
-                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100"
-              >
+            <div key={chat.id} className="group relative">
+              <button className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100">
                 <div className="flex items-start gap-2">
                   <MessageCircle
                     size={14}
@@ -123,9 +125,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                       </p>
                       <div className="flex items-center gap-1 mt-0.5">
                         <Clock size={10} className="text-gray-600" />
-                        <p className="text-xs text-gray-500">
-                          {chat.date}
-                        </p>
+                        <p className="text-xs text-gray-500">{chat.date}</p>
                       </div>
                     </div>
                   )}
@@ -141,7 +141,9 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         </div>
 
         {/* Bottom Section */}
-        <div className={`border-t border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-1.5 space-y-1" : "p-2.5 space-y-0.5"}`}>
+        <div
+          className={`border-t border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-1.5 space-y-1" : "p-2.5 space-y-0.5"}`}
+        >
           {!isCollapsed && (
             <>
               <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
@@ -155,7 +157,10 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
             </>
           )}
           <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
-            <Settings size={16} className="transition-transform duration-200 group-hover:rotate-90" />
+            <Settings
+              size={16}
+              className="transition-transform duration-200 group-hover:rotate-90"
+            />
             {!isCollapsed && <span className="text-xs">Settings</span>}
           </button>
           <button className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400">

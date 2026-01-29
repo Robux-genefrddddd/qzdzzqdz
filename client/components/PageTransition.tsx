@@ -23,7 +23,8 @@ export default function PageTransition() {
     <div
       className="fixed inset-0 bg-black pointer-events-none z-50"
       style={{
-        animation: "fadeIn 0.15s ease-in forwards, fadeOut 0.15s ease-out 0.15s forwards",
+        animation:
+          "fadeIn 0.15s ease-in forwards, fadeOut 0.15s ease-out 0.15s forwards",
       }}
     />
   );

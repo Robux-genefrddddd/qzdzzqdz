@@ -29,7 +29,7 @@ export default function SearchModal({
     }
 
     const filtered = chatHistory.filter((chat) =>
-      chat.title.toLowerCase().includes(query.toLowerCase())
+      chat.title.toLowerCase().includes(query.toLowerCase()),
     );
     setResults(filtered);
   }, [query, chatHistory]);

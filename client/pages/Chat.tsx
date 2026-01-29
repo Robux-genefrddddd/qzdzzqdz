@@ -141,7 +141,9 @@ export default function Chat() {
                       }`}
                     >
                       <p className="text-sm leading-relaxed">{message.text}</p>
-                      <span className={`text-xs mt-2 block font-medium ${message.sender === "user" ? "opacity-75" : "opacity-60 text-gray-400"}`}>
+                      <span
+                        className={`text-xs mt-2 block font-medium ${message.sender === "user" ? "opacity-75" : "opacity-60 text-gray-400"}`}
+                      >
                         {message.timestamp.toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -205,7 +207,10 @@ export default function Chat() {
                 className="px-3 py-2.5 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-95 group"
                 title="Send message (Enter)"
               >
-                <ArrowUp size={16} className="group-hover:-translate-y-0.5 transition-transform duration-200" />
+                <ArrowUp
+                  size={16}
+                  className="group-hover:-translate-y-0.5 transition-transform duration-200"
+                />
               </button>
             </div>
           </form>
@@ -220,7 +225,8 @@ export default function Chat() {
               Ready to chat?
             </h2>
             <p className="text-gray-400 mb-6 text-center text-xs leading-relaxed">
-              Sign in to unlock the full potential of PinIA and start building amazing Roblox games.
+              Sign in to unlock the full potential of PinIA and start building
+              amazing Roblox games.
             </p>
 
             <div className="space-y-2 mb-4">
