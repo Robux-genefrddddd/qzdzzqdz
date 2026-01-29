@@ -1,4 +1,4 @@
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save, Mail, Bell, Palette, Lock, Shield, Zap } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
