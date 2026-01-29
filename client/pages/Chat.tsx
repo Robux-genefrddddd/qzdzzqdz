@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowUp, Menu, X, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/config/firebase";
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
 
 interface Message {
   id: string;
