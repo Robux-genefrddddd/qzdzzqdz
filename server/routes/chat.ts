@@ -25,10 +25,16 @@ export const handleChat: RequestHandler = async (req, res) => {
     console.log("Sending request to OpenRouter with messages:", messages.length);
 
     const requestBody = {
-      model: "meta-llama/llama-2-7b-chat:free",
+      model: "openai/gpt-3.5-turbo",
       messages: messages,
       max_tokens: 1024,
     };
+
+    console.log("Request to OpenRouter:", {
+      url: "https://openrouter.io/api/v1/chat/completions",
+      model: requestBody.model,
+      messageCount: messages.length,
+    });
 
     const response = await fetch(
       "https://openrouter.io/api/v1/chat/completions",
@@ -48,7 +54,23 @@ export const handleChat: RequestHandler = async (req, res) => {
 
     // Read response as text first to debug
     const responseText = await response.text();
-    console.log("OpenRouter raw response:", responseText);
+    console.log("OpenRouter raw response length:", responseText.length);
+    console.log("OpenRouter raw response:", responseText.substring(0, 500));
+
+    if (!response.ok) {
+      console.error("OpenRouter HTTP error:", response.status);
+      if (responseText) {
+        try {
+          const errorData = JSON.parse(responseText);
+          console.error("OpenRouter error data:", errorData);
+          return res.status(response.status).json(errorData);
+        } catch (e) {
+          console.error("Failed to parse error response:", responseText);
+          return res.status(response.status).json({ error: responseText });
+        }
+      }
+      return res.status(response.status).json({ error: "Empty error response from OpenRouter" });
+    }
 
     if (!responseText) {
       console.error("OpenRouter returned empty response");
@@ -63,11 +85,6 @@ export const handleChat: RequestHandler = async (req, res) => {
       return res.status(500).json({ error: "Invalid response format from OpenRouter" });
     }
 
-    if (!response.ok) {
-      console.error("OpenRouter error:", data);
-      return res.status(response.status).json(data);
-    }
-
     const assistantMessage =
       data.choices?.[0]?.message?.content || "I couldn't generate a response.";
 
@@ -75,6 +92,6 @@ export const handleChat: RequestHandler = async (req, res) => {
     res.json({ message: assistantMessage });
   } catch (error) {
     console.error("Chat API error:", error);
-    res.status(500).json({ error: "Failed to process chat request" });
+    res.status(500).json({ error: `Server error: ${error instanceof Error ? error.message : "Unknown error"}` });
   }
 };
