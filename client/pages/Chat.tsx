@@ -202,6 +202,7 @@ export default function Chat() {
     setTypingUsername("PinIA");
 
     try {
+      console.log("Sending message to API...");
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -215,11 +216,21 @@ export default function Chat() {
         }),
       });
 
+      console.log("API response status:", response.status);
+
       if (!response.ok) {
-        throw new Error("Failed to get response from AI");
+        const errorData = await response.json();
+        console.error("API error response:", errorData);
+        throw new Error(`API error: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log("API response data:", data);
+
+      if (!data.message) {
+        throw new Error("No message in response");
+      }
+
       const aiMessage: Message = {
         id: Math.random().toString(),
         text: data.message,
@@ -227,18 +238,20 @@ export default function Chat() {
         timestamp: new Date(),
       };
 
+      console.log("Adding AI message:", aiMessage.text);
       setMessages((prev) => [...prev, aiMessage]);
       await saveMessage(aiMessage, chatId);
     } catch (error) {
       console.error("Chat error:", error);
       const errorMessage: Message = {
         id: Math.random().toString(),
-        text: "Sorry, I encountered an error processing your request. Please try again.",
+        text: `Error: ${error instanceof Error ? error.message : "Failed to get response from AI"}. Please try again.`,
         sender: "ai",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
+      console.log("Stopping loading state...");
       setIsLoading(false);
       setTypingUsername(null);
     }
