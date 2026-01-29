@@ -52,6 +52,25 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    if (searchParams.get("new") === "true") {
+      // Reset for new chat
+      setMessages([
+        {
+          id: "1",
+          text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+          sender: "ai",
+          timestamp: new Date(),
+        },
+      ]);
+      setInput("");
+      currentChatIdRef.current = "";
+      setCurrentChatId("");
+      // Clean up URL
+      navigate("/chat", { replace: true });
+    }
+  }, [searchParams, navigate]);
+
   const saveNewChat = async (title: string) => {
     if (!user) return null;
     try {
