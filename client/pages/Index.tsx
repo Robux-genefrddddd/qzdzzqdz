@@ -46,13 +46,13 @@ export default function Index() {
               <h1 className="text-hero">
                 AI Assistant
                 <br />
-                <span className="text-white">FOR Roblox Creators</span>
+                <span className="text-white underline decoration-2 underline-offset-4">FOR Roblox Creators</span>
               </h1>
 
               {/* Subtitle */}
               <p className="text-subheader mx-auto max-w-2xl">
-                Create, optimize, and scale your Roblox games with intelligent
-                guidance and best practices.
+                An intelligent AI designed specifically for Roblox creators to design, optimize,
+                and scale your games with professional guidance and industry best practices.
               </p>
             </div>
 
