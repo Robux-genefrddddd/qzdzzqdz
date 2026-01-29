@@ -82,9 +82,13 @@ export default function Chat() {
     if (!input.trim() || !user) return;
 
     const messageText = input;
+    let chatId = currentChatId;
 
-    if (!currentChatId) {
+    if (!chatId) {
+      const newChatId = Date.now().toString();
       await saveNewChat(messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""));
+      chatId = newChatId;
+      setCurrentChatId(newChatId);
     }
 
     const userMessage: Message = {
@@ -100,20 +104,52 @@ export default function Chat() {
     setIsLoading(true);
     setTypingUsername("PinIA");
 
-    setTimeout(async () => {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            ...messages,
+            userMessage,
+          ].map((msg) => ({
+            role: msg.sender === "user" ? "user" : "assistant",
+            content: msg.text,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response from AI");
+      }
+
+      const data = await response.json();
       const aiMessage: Message = {
         id: Math.random().toString(),
-        text: `Thanks for asking about "${messageText}". This is a simulated response from PinIA. In a production environment, this would be connected to an actual AI service to provide expert guidance on Roblox game development.`,
+        text: data.message,
         sender: "ai",
         timestamp: new Date(),
       };
+
       setMessages((prev) => [...prev, aiMessage]);
-      if (currentChatId) {
+      if (chatId) {
         await saveMessage(aiMessage);
       }
+    } catch (error) {
+      console.error("Chat error:", error);
+      const errorMessage: Message = {
+        id: Math.random().toString(),
+        text: "Sorry, I encountered an error processing your request. Please try again.",
+        sender: "ai",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
       setTypingUsername(null);
-    }, 1000);
+    }
   };
 
   return (
