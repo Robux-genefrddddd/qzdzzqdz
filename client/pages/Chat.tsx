@@ -101,12 +101,15 @@ export default function Chat() {
     let chatId = currentChatId;
 
     if (!chatId) {
-      const newChatId = Date.now().toString();
-      await saveNewChat(
+      const newChatId = await saveNewChat(
         messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""),
       );
-      chatId = newChatId;
-      setCurrentChatId(newChatId);
+      if (newChatId) {
+        chatId = newChatId;
+      } else {
+        console.error("Failed to create new chat");
+        return;
+      }
     }
 
     const userMessage: Message = {
