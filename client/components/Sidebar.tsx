@@ -47,7 +47,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         } ${!isOpen && "max-lg:-translate-x-full"}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800/30">
+        <div className={`flex items-center border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-3 justify-center" : "p-4 justify-between"}`}>
           {!isCollapsed && (
             <Link to="/" className="font-bold text-lg gradient-text hover:opacity-80 transition-opacity">
               PinIA
