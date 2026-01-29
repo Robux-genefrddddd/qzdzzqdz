@@ -23,12 +23,17 @@ import {
   orderBy,
   onSnapshot,
   limit,
+  doc,
+  deleteDoc,
+  updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { toast } from "sonner";
 
 interface SidebarProps {
   isOpen?: boolean;
   onClose?: () => void;
+  currentChatId?: string;
 }
 
 interface ChatItem {
@@ -38,7 +43,11 @@ interface ChatItem {
   timestamp?: Date;
 }
 
-export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
+export default function Sidebar({
+  isOpen = true,
+  onClose,
+  currentChatId,
+}: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
@@ -101,7 +110,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
   };
 
   const handleNewChat = () => {
-    navigate("/chat");
+    navigate("/chat?new=true");
     onClose?.();
   };
 
@@ -109,7 +118,6 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
     if (!user) return;
     try {
       const chatRef = doc(db, "users", user.uid, "chats", chatId);
-      const { deleteDoc } = await import("firebase/firestore");
       await deleteDoc(chatRef);
       toast.success("Chat deleted");
       setOpenMenuId(null);
@@ -123,7 +131,6 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
     if (!user || !renamingChatId || !newChatName.trim()) return;
     try {
       const chatRef = doc(db, "users", user.uid, "chats", renamingChatId);
-      const { updateDoc, serverTimestamp } = await import("firebase/firestore");
       await updateDoc(chatRef, {
         title: newChatName,
         updatedAt: serverTimestamp(),
@@ -243,7 +250,17 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
           )}
           {chatHistory.map((chat) => (
             <div key={chat.id} className="group relative">
-              <button className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100">
+              <button
+                onClick={() => {
+                  navigate(`/chat?chat=${chat.id}`);
+                  onClose?.();
+                }}
+                className={`w-full text-left px-2 py-1.5 rounded-lg transition-all duration-200 ${
+                  currentChatId === chat.id
+                    ? "bg-cyan-500/20 border-l-2 border-cyan-500 text-cyan-300 hover:bg-cyan-500/30"
+                    : "hover:bg-gray-900/40 text-gray-300 hover:text-gray-100"
+                }`}
+              >
                 <div className="flex items-start gap-2">
                   <MessageCircle
                     size={14}

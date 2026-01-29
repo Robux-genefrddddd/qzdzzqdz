@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowUp, Menu, X, ArrowRight } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
@@ -25,6 +25,7 @@ interface Message {
 export default function Chat() {
   const { user, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -39,6 +40,7 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [currentChatId, setCurrentChatId] = useState<string>("");
   const [typingUsername, setTypingUsername] = useState<string | null>(null);
+  const currentChatIdRef = useRef<string>("");
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -50,32 +52,105 @@ export default function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    const handleChatNavigation = async () => {
+      // Wait for auth to be loaded before accessing Firestore
+      if (authLoading) return;
+
+      const newParam = searchParams.get("new");
+      const chatParam = searchParams.get("chat");
+
+      if (newParam === "true") {
+        // Reset for new chat
+        setMessages([
+          {
+            id: "1",
+            text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+            sender: "ai",
+            timestamp: new Date(),
+          },
+        ]);
+        setInput("");
+        currentChatIdRef.current = "";
+        setCurrentChatId("");
+        // Clean up URL
+        navigate("/chat", { replace: true });
+      } else if (chatParam && user) {
+        // Load existing chat
+        try {
+          const chatDocRef = doc(db, "users", user.uid, "chats", chatParam);
+          const chatSnapshot = await getDoc(chatDocRef);
+          if (chatSnapshot.exists()) {
+            const data = chatSnapshot.data();
+            const loadedMessages: Message[] = (data.messages || []).map(
+              (msg: any) => ({
+                id: msg.id,
+                text: msg.text,
+                sender: msg.sender,
+                timestamp: new Date(msg.timestamp),
+              }),
+            );
+            setMessages(
+              loadedMessages.length > 0
+                ? loadedMessages
+                : [
+                    {
+                      id: "1",
+                      text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+                      sender: "ai",
+                      timestamp: new Date(),
+                    },
+                  ],
+            );
+            currentChatIdRef.current = chatParam;
+            setCurrentChatId(chatParam);
+            setInput("");
+          } else {
+            // Chat not found, reset
+            currentChatIdRef.current = "";
+            setCurrentChatId("");
+            navigate("/chat?new=true", { replace: true });
+          }
+        } catch (error) {
+          console.error("Error loading chat:", error);
+          // On error, show initial state
+          setMessages([
+            {
+              id: "1",
+              text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+              sender: "ai",
+              timestamp: new Date(),
+            },
+          ]);
+        }
+      }
+    };
+
+    handleChatNavigation();
+  }, [searchParams, user, authLoading, navigate]);
+
   const saveNewChat = async (title: string) => {
-    if (!user) return;
+    if (!user) return null;
     try {
-      const chatDocRef = doc(
-        db,
-        "users",
-        user.uid,
-        "chats",
-        Date.now().toString(),
-      );
+      const chatId = Date.now().toString();
+      const chatDocRef = doc(db, "users", user.uid, "chats", chatId);
       await setDoc(chatDocRef, {
         title,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         messages: [],
       });
-      setCurrentChatId(chatDocRef.id);
+      return chatId;
     } catch (error) {
       console.error("Error saving chat:", error);
+      return null;
     }
   };
 
-  const saveMessage = async (message: Message) => {
-    if (!user || !currentChatId) return;
+  const saveMessage = async (message: Message, chatId: string) => {
+    if (!user || !chatId) return;
     try {
-      const chatDocRef = doc(db, "users", user.uid, "chats", currentChatId);
+      const chatDocRef = doc(db, "users", user.uid, "chats", chatId);
       await updateDoc(chatDocRef, {
         messages: arrayUnion({
           id: message.id,
@@ -92,18 +167,23 @@ export default function Chat() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || !user) return;
+    if (!input.trim() || !user || isLoading) return;
 
     const messageText = input;
-    let chatId = currentChatId;
+    let chatId = currentChatIdRef.current;
 
     if (!chatId) {
-      const newChatId = Date.now().toString();
-      await saveNewChat(
+      const newChatId = await saveNewChat(
         messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""),
       );
-      chatId = newChatId;
-      setCurrentChatId(newChatId);
+      if (newChatId) {
+        chatId = newChatId;
+        currentChatIdRef.current = newChatId;
+        setCurrentChatId(newChatId);
+      } else {
+        console.error("Failed to create new chat");
+        return;
+      }
     }
 
     const userMessage: Message = {
@@ -114,12 +194,13 @@ export default function Chat() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    await saveMessage(userMessage);
+    await saveMessage(userMessage, chatId);
     setInput("");
     setIsLoading(true);
     setTypingUsername("PinIA");
 
     try {
+      console.log("Sending message to API...");
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -133,11 +214,21 @@ export default function Chat() {
         }),
       });
 
+      console.log("API response status:", response.status);
+
       if (!response.ok) {
-        throw new Error("Failed to get response from AI");
+        const errorData = await response.json();
+        console.error("API error response:", errorData);
+        throw new Error(`API error: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log("API response data:", data);
+
+      if (!data.message) {
+        throw new Error("No message in response");
+      }
+
       const aiMessage: Message = {
         id: Math.random().toString(),
         text: data.message,
@@ -145,20 +236,20 @@ export default function Chat() {
         timestamp: new Date(),
       };
 
+      console.log("Adding AI message:", aiMessage.text);
       setMessages((prev) => [...prev, aiMessage]);
-      if (chatId) {
-        await saveMessage(aiMessage);
-      }
+      await saveMessage(aiMessage, chatId);
     } catch (error) {
       console.error("Chat error:", error);
       const errorMessage: Message = {
         id: Math.random().toString(),
-        text: "Sorry, I encountered an error processing your request. Please try again.",
+        text: `Error: ${error instanceof Error ? error.message : "Failed to get response from AI"}. Please try again.`,
         sender: "ai",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
+      console.log("Stopping loading state...");
       setIsLoading(false);
       setTypingUsername(null);
     }
@@ -179,7 +270,11 @@ export default function Chat() {
 
       {/* Sidebar */}
       <div className="relative z-50">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          currentChatId={currentChatId}
+        />
       </div>
 
       {/* Main chat area */}
@@ -275,18 +370,18 @@ export default function Chat() {
                   <div className="flex justify-start animate-fade-in-up gap-3 mb-2">
                     <div className="flex-shrink-0 mt-0.5">
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
-                        {typingUsername.charAt(0)}
+                        P
                       </div>
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="text-xs text-gray-500 font-medium px-1">
-                        {typingUsername} is typing...
+                        PinIA is typing...
                       </span>
-                      <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 backdrop-blur-sm px-4 py-3.5">
+                      <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 border-cyan-500/30 backdrop-blur-sm px-4 py-3.5 shadow-lg shadow-cyan-500/10">
                         <div className="flex gap-1.5">
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce animation-delay-200" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce animation-delay-400" />
                         </div>
                       </div>
                     </div>
