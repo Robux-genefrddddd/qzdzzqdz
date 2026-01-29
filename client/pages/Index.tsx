@@ -21,16 +21,6 @@ export default function Index() {
         />
       </div>
 
-      {/* Top Gradient Blur Fade */}
-      <GradualBlur
-        preset="page-header"
-        position="top"
-        height="120px"
-        strength={3}
-        curve="ease-out"
-        zIndex={20}
-      />
-
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col flex-1">
         {/* Navigation */}
