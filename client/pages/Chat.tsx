@@ -214,23 +214,26 @@ export default function Chat() {
 
       {/* Auth Modal */}
       {showAuthPrompt && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 max-w-md w-full animate-fade-in-up">
-            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-cyan-500/10 mb-6">
-              <Sparkles className="text-cyan-400" size={24} />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-b from-gray-950 to-black border border-gray-800/50 rounded-3xl p-8 max-w-md w-full animate-fade-in-up shadow-2xl">
+            {/* Decorative header */}
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                <span className="text-2xl font-bold text-white">P</span>
+              </div>
             </div>
 
-            <h2 className="text-2xl font-semibold text-white mb-2">
-              Sign in to continue
+            <h2 className="text-3xl font-bold text-white mb-3 text-center">
+              Ready to chat?
             </h2>
-            <p className="text-gray-400 mb-8">
-              Create an account to start chatting with PinIA.
+            <p className="text-gray-400 mb-8 text-center text-sm leading-relaxed">
+              Sign in to unlock the full potential of PinIA and start building amazing Roblox games.
             </p>
 
             <div className="space-y-3 mb-6">
               <Link
                 to="/register"
-                className="block w-full py-3 px-4 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors text-center font-medium"
+                className="block w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 text-center font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95"
               >
                 Create Account
               </Link>
@@ -239,17 +242,17 @@ export default function Chat() {
                   setShowAuthPrompt(false);
                   setIsAuthenticated(true);
                 }}
-                className="block w-full py-3 px-4 border border-gray-800 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                className="block w-full py-3 px-4 border border-gray-700 text-white rounded-xl hover:bg-gray-900/50 hover:border-gray-600 transition-all duration-200 font-medium"
               >
-                Demo (No signup)
+                Sign In
               </button>
             </div>
 
             <button
               onClick={() => setShowAuthPrompt(false)}
-              className="w-full py-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="w-full py-3 text-sm text-gray-400 hover:text-gray-200 transition-colors"
             >
-              Maybe later
+              Continue as Guest
             </button>
           </div>
         </div>
