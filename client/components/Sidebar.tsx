@@ -10,6 +10,8 @@ import {
   Trash2,
   Share2,
   Clock,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
