@@ -354,6 +354,48 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         onClose={() => setIsSearchOpen(false)}
         chatHistory={chatHistory}
       />
+
+      {/* Rename Modal */}
+      {renameModalOpen && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-b from-gray-950 to-black border border-gray-800/50 rounded-2xl p-6 max-w-sm w-full animate-fade-in-up shadow-2xl">
+            <h2 className="text-2xl font-bold text-white mb-4 text-center">
+              Rename Chat
+            </h2>
+            <input
+              type="text"
+              value={newChatName}
+              onChange={(e) => setNewChatName(e.target.value)}
+              placeholder="Enter new chat name"
+              className="w-full px-4 py-2.5 bg-gray-900/60 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all mb-4"
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleRenameChat();
+                }
+              }}
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={handleRenameChat}
+                className="flex-1 py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95"
+              >
+                Rename
+              </button>
+              <button
+                onClick={() => {
+                  setRenameModalOpen(false);
+                  setRenamingChatId(null);
+                  setNewChatName("");
+                }}
+                className="flex-1 py-2.5 px-4 border border-gray-700 text-white rounded-lg hover:bg-gray-900/50 transition-all duration-200 font-medium"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
