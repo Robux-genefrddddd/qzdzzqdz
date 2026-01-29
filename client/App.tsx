@@ -36,6 +36,9 @@ function PageContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/settings" element={<Settings />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
