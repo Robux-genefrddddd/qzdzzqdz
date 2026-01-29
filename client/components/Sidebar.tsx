@@ -14,6 +14,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import SearchModal from "./SearchModal";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -22,6 +23,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const chatHistory = [
     { id: 1, title: "Roblox Game Design Tips", date: "Today" },
