@@ -16,8 +16,8 @@ interface Message {
 }
 
 export default function Chat() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  const { user, isLoading: authLoading } = useAuth();
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -30,6 +30,7 @@ export default function Chat() {
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [currentChatId, setCurrentChatId] = useState<string>("");
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
