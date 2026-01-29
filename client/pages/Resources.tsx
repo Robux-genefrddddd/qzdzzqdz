@@ -12,36 +12,42 @@ const resources = [
     description: "Official Roblox Studio documentation and tutorials",
     url: "https://create.roblox.com/docs",
     category: "Documentation",
+    icon: BookOpen,
   },
   {
     title: "Luau Programming Guide",
     description: "Learn Luau, the scripting language for Roblox",
     url: "https://roblox.github.io/luau/",
     category: "Programming",
+    icon: Code,
   },
   {
     title: "Roblox Creator Exchange (DevEx)",
     description: "Monetize your games and earn real money",
     url: "https://devex.roblox.com",
     category: "Monetization",
+    icon: Zap,
   },
   {
     title: "Developer Forum",
     description: "Connect with other Roblox developers and get help",
     url: "https://devforum.roblox.com",
     category: "Community",
+    icon: Users,
   },
   {
     title: "Asset Library",
     description: "Browse and download assets for your games",
     url: "https://www.roblox.com/catalog",
     category: "Assets",
+    icon: Package,
   },
   {
     title: "Game Design Best Practices",
     description: "Tips and tricks for designing engaging Roblox games",
     url: "https://create.roblox.com/docs/building-experiences/design",
     category: "Design",
+    icon: Palette,
   },
 ];
 
