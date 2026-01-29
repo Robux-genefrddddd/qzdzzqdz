@@ -31,6 +31,7 @@ export default function Chat() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [currentChatId, setCurrentChatId] = useState<string>("");
+  const [typingUsername, setTypingUsername] = useState<string | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) {
