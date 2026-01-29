@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, User, Github, Check } from "lucide-react";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
+import TransitionLink from "@/components/TransitionLink";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -322,12 +323,12 @@ export default function Register() {
           {/* Sign in link */}
           <p className="text-center text-xs text-gray-400 mt-4" style={{ animationDelay: "0.45s" }}>
             Already have an account?{" "}
-            <Link
+            <TransitionLink
               to="/login"
               className="text-cyan-400 font-medium hover:text-cyan-300 transition-colors duration-300"
             >
               Sign in
-            </Link>
+            </TransitionLink>
           </p>
         </div>
       </div>
