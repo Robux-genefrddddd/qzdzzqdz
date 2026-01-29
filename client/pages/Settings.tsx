@@ -16,9 +16,8 @@ interface UserPreferences {
 }
 
 export default function Settings() {
-  const { user, isLoading } = useNavigate();
   const navigate = useNavigate();
-  const { user: authUser } = useAuth();
+  const { user: authUser, isLoading } = useAuth();
   const [preferences, setPreferences] = useState<UserPreferences>({
     emailNotifications: true,
     chatNotifications: true,
