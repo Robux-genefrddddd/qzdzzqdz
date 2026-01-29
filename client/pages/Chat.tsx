@@ -85,17 +85,17 @@ export default function Chat() {
       {/* Main chat area */}
       <div className="flex-1 flex flex-col relative z-10">
         {/* Header */}
-        <header className="border-b border-gray-800/30 backdrop-blur-sm py-4 px-4 sm:px-6 flex items-center justify-between bg-black/50">
+        <header className="border-b border-gray-800/30 backdrop-blur-md py-4 px-4 sm:px-6 flex items-center justify-between bg-gradient-to-b from-black/80 to-black/40">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 hover:bg-gray-900 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-gray-900/60 text-gray-400 hover:text-cyan-400 rounded-lg transition-all duration-200"
           >
             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <h1 className="text-lg font-semibold text-white flex-1 text-center lg:text-left">
             Chat with PinIA
           </h1>
-          <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-black font-semibold text-sm flex-shrink-0">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-200">
             U
           </div>
         </header>
