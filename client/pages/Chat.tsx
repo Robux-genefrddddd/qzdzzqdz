@@ -78,12 +78,12 @@ export default function Chat() {
       </div>
 
       {/* Sidebar */}
-      <div className="relative z-10">
+      <div className="relative z-50">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       </div>
 
       {/* Main chat area */}
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="flex-1 flex flex-col relative z-0">
         {/* Header */}
         <header className="border-b border-gray-800/30 backdrop-blur-md py-4 px-4 sm:px-6 flex items-center justify-between bg-gradient-to-b from-black/80 to-black/40">
           <button
