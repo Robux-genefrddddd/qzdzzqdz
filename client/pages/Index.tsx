@@ -28,6 +28,46 @@ export default function Index() {
 
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col flex-1">
+        {/* Card Navigation */}
+        <CardNav
+          logo="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='32' font-weight='bold' font-family='Inter, sans-serif' fill='%2300d4ff'%3EPinIA%3C/text%3E%3C/svg%3E"
+          logoAlt="PinIA"
+          items={[
+            {
+              label: 'Features',
+              bgColor: 'rgba(82, 39, 255, 0.1)',
+              textColor: '#ffffff',
+              links: [
+                { label: 'Scripting', href: '#scripting', ariaLabel: 'Learn about scripting' },
+                { label: 'Performance', href: '#performance', ariaLabel: 'Learn about performance' }
+              ]
+            },
+            {
+              label: 'Resources',
+              bgColor: 'rgba(0, 255, 136, 0.1)',
+              textColor: '#ffffff',
+              links: [
+                { label: 'Documentation', href: '#docs', ariaLabel: 'View documentation' },
+                { label: 'Community', href: '#community', ariaLabel: 'Join community' }
+              ]
+            },
+            {
+              label: 'Company',
+              bgColor: 'rgba(0, 212, 255, 0.1)',
+              textColor: '#ffffff',
+              links: [
+                { label: 'About', href: '#about', ariaLabel: 'Learn about us' },
+                { label: 'Contact', href: '#contact', ariaLabel: 'Get in touch' }
+              ]
+            }
+          ]}
+          baseColor='rgba(255, 255, 255, 0.05)'
+          menuColor='#ffffff'
+          buttonBgColor='#00d4ff'
+          buttonTextColor='#000000'
+          className='mt-2'
+        />
+
         {/* Navigation */}
         <nav className="border-b border-border/20 backdrop-blur-md sticky top-0 z-40 bg-background/40">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
