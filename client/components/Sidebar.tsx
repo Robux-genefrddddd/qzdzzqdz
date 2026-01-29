@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ChevronLeft,
   Plus,
@@ -13,8 +13,12 @@ import {
   BookOpen,
   HelpCircle,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchModal from "./SearchModal";
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/config/firebase";
+import { collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import { toast } from "sonner";
 
 interface SidebarProps {
   isOpen?: boolean;
