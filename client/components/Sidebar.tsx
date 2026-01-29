@@ -187,6 +187,13 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
       {!isCollapsed && (
         <div className="hidden lg:block w-64" aria-hidden="true" />
       )}
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        chatHistory={chatHistory}
+      />
     </>
   );
 }
