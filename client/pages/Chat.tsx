@@ -338,18 +338,18 @@ export default function Chat() {
                   <div className="flex justify-start animate-fade-in-up gap-3 mb-2">
                     <div className="flex-shrink-0 mt-0.5">
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
-                        {typingUsername.charAt(0)}
+                        P
                       </div>
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="text-xs text-gray-500 font-medium px-1">
-                        {typingUsername} is typing...
+                        PinIA is typing...
                       </span>
-                      <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 backdrop-blur-sm px-4 py-3.5">
+                      <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 border-cyan-500/30 backdrop-blur-sm px-4 py-3.5 shadow-lg shadow-cyan-500/10">
                         <div className="flex gap-1.5">
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
-                          <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce animation-delay-200" />
+                          <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce animation-delay-400" />
                         </div>
                       </div>
                     </div>
