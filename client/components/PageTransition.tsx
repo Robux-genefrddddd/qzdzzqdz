@@ -4,17 +4,27 @@ import { useLocation } from "react-router-dom";
 export default function PageTransition() {
   const location = useLocation();
   const [displayTransition, setDisplayTransition] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Déclencher l'animation au changement de route
-    setDisplayTransition(true);
+    // Animation de sortie
+    setIsExiting(true);
 
-    // Garder l'overlay pendant toute l'animation (0.8s total)
-    const timer = setTimeout(() => {
+    // Afficher l'écran de transition au point milieu de la fade-out
+    const showTransitionTimer = setTimeout(() => {
+      setDisplayTransition(true);
+      setIsExiting(false);
+    }, 150);
+
+    // Masquer la transition après la fade-in
+    const hideTransitionTimer = setTimeout(() => {
       setDisplayTransition(false);
-    }, 800);
+    }, 450);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(showTransitionTimer);
+      clearTimeout(hideTransitionTimer);
+    };
   }, [location.pathname]);
 
   return (
@@ -23,8 +33,7 @@ export default function PageTransition() {
         <div
           className="fixed inset-0 bg-black pointer-events-none z-50"
           style={{
-            animation:
-              "transitionWipeComplete 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+            animation: "fadeIn 0.3s ease-out forwards",
           }}
         />
       )}
