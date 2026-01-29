@@ -118,30 +118,30 @@ export default function Chat() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex animate-fade-in-up gap-2 ${
+                  className={`flex animate-fade-in-up gap-2.5 ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   {message.sender === "ai" && (
-                    <div className="flex-shrink-0">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
                         P
                       </div>
                     </div>
                   )}
                   <div className="flex flex-col gap-1">
                     {message.sender === "ai" && (
-                      <span className="text-xs text-gray-400 ml-0.5">PinIA</span>
+                      <span className="text-xs text-gray-400 ml-1">PinIA</span>
                     )}
                     <div
-                      className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-xl ${
+                      className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-2xl transition-all duration-200 ${
                         message.sender === "user"
-                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-none shadow-lg shadow-cyan-500/20"
-                          : "bg-gray-900/80 text-white rounded-bl-none border border-gray-800/50"
+                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-none shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                          : "bg-gradient-to-br from-gray-800/50 to-gray-900/50 text-white rounded-bl-none border border-gray-700/50 hover:border-gray-600/50 backdrop-blur-sm"
                       }`}
                     >
                       <p className="text-sm leading-relaxed">{message.text}</p>
-                      <span className={`text-xs mt-1.5 block ${message.sender === "user" ? "opacity-70" : "opacity-60 text-gray-400"}`}>
+                      <span className={`text-xs mt-2 block font-medium ${message.sender === "user" ? "opacity-75" : "opacity-60 text-gray-400"}`}>
                         {message.timestamp.toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -150,8 +150,8 @@ export default function Chat() {
                     </div>
                   </div>
                   {message.sender === "user" && (
-                    <div className="flex-shrink-0">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/25">
                         U
                       </div>
                     </div>
