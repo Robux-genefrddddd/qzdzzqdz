@@ -140,7 +140,7 @@ export default function Index() {
             ]}
             direction="left"
             speed={60}
-            logoHeight={36}
+            logoHeight={56}
             gap={40}
             pauseOnHover
             scaleOnHover
