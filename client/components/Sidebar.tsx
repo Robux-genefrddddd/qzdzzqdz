@@ -75,17 +75,24 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         {/* Search */}
         {!isCollapsed && (
           <div className="p-3 border-b border-gray-800/30">
-            <div className="relative">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="w-full relative flex items-center gap-2.5"
+            >
               <Search
                 size={14}
-                className="absolute left-2.5 top-2 text-gray-500"
+                className="text-gray-500 flex-shrink-0"
               />
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full pl-8 pr-2.5 py-1.5 bg-gray-900/50 border border-gray-800 rounded-lg text-gray-300 text-xs placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
+                className="w-full pl-0 pr-2.5 py-1.5 bg-transparent border-b border-gray-800 rounded-none text-gray-300 text-xs placeholder:text-gray-600 focus:outline-none focus:border-cyan-500/50 transition-all duration-200 pointer-events-none"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsSearchOpen(true);
+                }}
               />
-            </div>
+            </button>
           </div>
         )}
 
