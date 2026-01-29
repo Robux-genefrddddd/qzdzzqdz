@@ -16,8 +16,8 @@ export default function TransitionLink({
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    
-    // Navigate après que l'écran noir couvre tout (0.4s)
+
+    // Navigate au moment exact où l'écran noir recouvre tout (50% de l'animation = 0.4s)
     setTimeout(() => {
       navigate(to);
     }, 400);
