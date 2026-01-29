@@ -53,23 +53,60 @@ export default function Chat() {
   }, [messages]);
 
   useEffect(() => {
-    if (searchParams.get("new") === "true") {
-      // Reset for new chat
-      setMessages([
-        {
-          id: "1",
-          text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
-          sender: "ai",
-          timestamp: new Date(),
-        },
-      ]);
-      setInput("");
-      currentChatIdRef.current = "";
-      setCurrentChatId("");
-      // Clean up URL
-      navigate("/chat", { replace: true });
-    }
-  }, [searchParams, navigate]);
+    const handleChatNavigation = async () => {
+      const newParam = searchParams.get("new");
+      const chatParam = searchParams.get("chat");
+
+      if (newParam === "true") {
+        // Reset for new chat
+        setMessages([
+          {
+            id: "1",
+            text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+            sender: "ai",
+            timestamp: new Date(),
+          },
+        ]);
+        setInput("");
+        currentChatIdRef.current = "";
+        setCurrentChatId("");
+        // Clean up URL
+        navigate("/chat", { replace: true });
+      } else if (chatParam && user) {
+        // Load existing chat
+        try {
+          const chatDocRef = doc(db, "users", user.uid, "chats", chatParam);
+          const chatSnapshot = await getDoc(chatDocRef);
+          if (chatSnapshot.exists()) {
+            const data = chatSnapshot.data();
+            const loadedMessages: Message[] = (data.messages || []).map(
+              (msg: any) => ({
+                id: msg.id,
+                text: msg.text,
+                sender: msg.sender,
+                timestamp: new Date(msg.timestamp),
+              })
+            );
+            setMessages(loadedMessages.length > 0 ? loadedMessages : [
+              {
+                id: "1",
+                text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+                sender: "ai",
+                timestamp: new Date(),
+              },
+            ]);
+            currentChatIdRef.current = chatParam;
+            setCurrentChatId(chatParam);
+            setInput("");
+          }
+        } catch (error) {
+          console.error("Error loading chat:", error);
+        }
+      }
+    };
+
+    handleChatNavigation();
+  }, [searchParams, user, navigate]);
 
   const saveNewChat = async (title: string) => {
     if (!user) return null;
