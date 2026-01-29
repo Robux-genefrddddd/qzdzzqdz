@@ -159,12 +159,20 @@ export default function Chat() {
                 </div>
               ))}
               {isLoading && (
-                <div className="flex justify-start animate-fade-in-up">
-                  <div className="bg-gray-900 text-white rounded-lg rounded-bl-none border border-gray-800 px-4 py-3">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
-                      <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                <div className="flex justify-start animate-fade-in-up gap-2">
+                  <div className="flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                      P
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs text-gray-400 ml-0.5">PinIA</span>
+                    <div className="bg-gray-900/80 text-white rounded-xl rounded-bl-none border border-gray-800/50 px-4 py-3">
+                      <div className="flex gap-1.5">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-200" />
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce animation-delay-400" />
+                      </div>
                     </div>
                   </div>
                 </div>
