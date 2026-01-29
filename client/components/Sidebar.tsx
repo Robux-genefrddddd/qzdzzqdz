@@ -114,7 +114,6 @@ export default function Sidebar({ isOpen = true, onClose, currentChatId }: Sideb
     if (!user) return;
     try {
       const chatRef = doc(db, "users", user.uid, "chats", chatId);
-      const { deleteDoc } = await import("firebase/firestore");
       await deleteDoc(chatRef);
       toast.success("Chat deleted");
       setOpenMenuId(null);
