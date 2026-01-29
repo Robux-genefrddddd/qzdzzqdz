@@ -39,6 +39,10 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userInitial, setUserInitial] = useState("U");
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [renameModalOpen, setRenameModalOpen] = useState(false);
+  const [renamingChatId, setRenamingChatId] = useState<string | null>(null);
+  const [newChatName, setNewChatName] = useState("");
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
