@@ -15,6 +15,9 @@ import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import PageTransition from "./components/PageTransition";
+import Resources from "./pages/Resources";
+import Feedback from "./pages/Feedback";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ function PageContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/settings" element={<Settings />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

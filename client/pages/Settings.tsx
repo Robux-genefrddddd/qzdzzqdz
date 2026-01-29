@@ -1,0 +1,314 @@
+import {
+  ArrowLeft,
+  Save,
+  Mail,
+  Bell,
+  Palette,
+  Lock,
+  Shield,
+  Zap,
+} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import Sidebar from "@/components/Sidebar";
+import Squares from "@/components/Squares";
+import { useAuth } from "@/context/AuthContext";
+import { useState, useEffect } from "react";
+import { db } from "@/config/firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { toast } from "sonner";
+
+interface UserPreferences {
+  emailNotifications: boolean;
+  chatNotifications: boolean;
+  theme: "dark" | "light";
+  apiAccess: boolean;
+}
+
+export default function Settings() {
+  const navigate = useNavigate();
+  const { user: authUser, isLoading } = useAuth();
+  const [preferences, setPreferences] = useState<UserPreferences>({
+    emailNotifications: true,
+    chatNotifications: true,
+    theme: "dark",
+    apiAccess: false,
+  });
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoadingPrefs, setIsLoadingPrefs] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading && !authUser) {
+      navigate("/login");
+    }
+  }, [authUser, isLoading, navigate]);
+
+  useEffect(() => {
+    const loadPreferences = async () => {
+      if (!authUser) return;
+      try {
+        const userDoc = await getDoc(doc(db, "users", authUser.uid));
+        if (userDoc.exists() && userDoc.data().preferences) {
+          setPreferences(userDoc.data().preferences);
+        }
+      } catch (error) {
+        console.error("Error loading preferences:", error);
+      } finally {
+        setIsLoadingPrefs(false);
+      }
+    };
+    loadPreferences();
+  }, [authUser]);
+
+  const handleSave = async () => {
+    if (!authUser) return;
+    setIsSaving(true);
+    try {
+      await updateDoc(doc(db, "users", authUser.uid), {
+        preferences,
+        updatedAt: new Date().toISOString(),
+      });
+      toast.success("Settings saved successfully!");
+    } catch (error) {
+      console.error("Error saving preferences:", error);
+      toast.error("Failed to save settings");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const togglePreference = (key: keyof UserPreferences) => {
+    if (typeof preferences[key] === "boolean") {
+      setPreferences((prev) => ({
+        ...prev,
+        [key]: !prev[key],
+      }));
+    }
+  };
+
+  return (
+    <div className="flex h-screen bg-black text-white relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 z-0 opacity-80">
+        <Squares
+          direction="diagonal"
+          speed={0.5}
+          borderColor="#333"
+          squareSize={50}
+          hoverFillColor="#1a1a2e"
+        />
+      </div>
+
+      {/* Sidebar */}
+      <div className="relative z-50">
+        <Sidebar />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-y-auto relative z-10">
+        {/* Header */}
+        <header className="border-b border-gray-800/30 backdrop-blur-md py-4 px-6 bg-gradient-to-b from-black/80 to-black/40">
+          <div className="flex items-center gap-4">
+            <Link
+              to="/chat"
+              className="p-2 hover:bg-gray-900/60 rounded-lg transition-all"
+            >
+              <ArrowLeft size={20} />
+            </Link>
+            <h1 className="text-2xl font-bold">Settings</h1>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="flex-1 p-6 overflow-y-auto">
+          <div className="max-w-4xl mx-auto">
+            {/* Header Section */}
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold mb-2">Settings</h2>
+              <p className="text-gray-400">
+                Manage your account preferences and settings
+              </p>
+            </div>
+
+            {/* Account Section */}
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20">
+                  <Lock size={20} className="text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-semibold">Account</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Mail size={16} className="text-cyan-400" />
+                    <p className="text-sm text-gray-400">Email Address</p>
+                  </div>
+                  <p className="font-medium text-lg break-all">
+                    {authUser?.email}
+                  </p>
+                </div>
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield size={16} className="text-cyan-400" />
+                    <p className="text-sm text-gray-400">Account Created</p>
+                  </div>
+                  <p className="font-medium text-lg">
+                    {authUser?.metadata?.creationTime
+                      ? new Date(
+                          authUser.metadata.creationTime,
+                        ).toLocaleDateString()
+                      : "N/A"}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Notifications Section */}
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-yellow-500/20 to-orange-600/20">
+                  <Bell size={20} className="text-yellow-400" />
+                </div>
+                <h3 className="text-xl font-semibold">Notifications</h3>
+              </div>
+              <div className="space-y-4">
+                {/* Email Notifications */}
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">
+                        Email Notifications
+                      </p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Receive updates about your account and chats
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("emailNotifications")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
+                        preferences.emailNotifications
+                          ? "bg-cyan-500"
+                          : "bg-gray-700"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.emailNotifications
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Chat Notifications */}
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">
+                        Chat Notifications
+                      </p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Get notified when you receive new messages
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("chatNotifications")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
+                        preferences.chatNotifications
+                          ? "bg-cyan-500"
+                          : "bg-gray-700"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.chatNotifications
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* API Access */}
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">API Access</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Enable API access for integrations
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("apiAccess")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
+                        preferences.apiAccess ? "bg-cyan-500" : "bg-gray-700"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.apiAccess
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Preferences Section */}
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-600/20">
+                  <Palette size={20} className="text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold">Appearance</h3>
+              </div>
+              <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50">
+                <div>
+                  <p className="font-medium mb-4 text-white">Theme</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      onClick={() =>
+                        setPreferences((prev) => ({ ...prev, theme: "dark" }))
+                      }
+                      className={`px-4 py-3 rounded-lg transition-all font-medium ${
+                        preferences.theme === "dark"
+                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/25"
+                          : "bg-gray-900/40 text-gray-400 hover:bg-gray-900/60 border border-gray-800"
+                      }`}
+                    >
+                      ◐ Dark
+                    </button>
+                    <button
+                      disabled
+                      className="px-4 py-3 rounded-lg bg-gray-900/20 text-gray-500 cursor-not-allowed opacity-50 border border-gray-800 font-medium"
+                    >
+                      ☀ Light (Soon)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Save Button */}
+            <div className="sticky bottom-0 bg-black/80 backdrop-blur-sm -m-6 p-6 border-t border-gray-800/30">
+              <button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95 flex items-center justify-center gap-2"
+              >
+                <Save size={18} />
+                {isSaving ? "Saving..." : "Save Settings"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
