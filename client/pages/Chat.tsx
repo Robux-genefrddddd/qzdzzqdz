@@ -152,7 +152,7 @@ export default function Chat() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || !user) return;
+    if (!input.trim() || !user || isLoading) return;
 
     const messageText = input;
     let chatId = currentChatIdRef.current;
