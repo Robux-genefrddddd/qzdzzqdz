@@ -4,9 +4,11 @@ import { Mail, Lock, User, Github, Check } from "lucide-react";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
 import TransitionLink from "@/components/TransitionLink";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { signUp } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
