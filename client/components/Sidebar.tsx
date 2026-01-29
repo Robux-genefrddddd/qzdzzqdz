@@ -42,30 +42,30 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-gray-950 to-black border-r border-gray-800/50 transition-all duration-300 z-50 flex flex-col ${
+        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-gray-950 to-black border-r border-gray-800/50 transition-all duration-300 z-50 flex flex-col pointer-events-auto ${
           isCollapsed ? "w-20" : "w-64"
         } ${!isOpen && "max-lg:-translate-x-full"}`}
       >
         {/* Header */}
-        <div className={`flex items-center border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-3 justify-center" : "p-4 justify-between"}`}>
+        <div className={`flex items-center border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2 justify-center" : "p-3 justify-between"}`}>
           {!isCollapsed && (
-            <Link to="/" className="font-bold text-lg gradient-text hover:opacity-80 transition-opacity">
+            <Link to="/" className="font-bold text-base text-white hover:opacity-80 transition-opacity">
               PinIA
             </Link>
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 hover:bg-gray-900/60 rounded-lg transition-all duration-200 text-gray-400 hover:text-cyan-400"
+            className="p-1.5 hover:bg-gray-900/60 rounded-lg transition-all duration-200 text-gray-400 hover:text-cyan-400 relative z-50"
             title={isCollapsed ? "Expand" : "Collapse"}
           >
-            <ChevronLeft size={20} className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`} />
+            <ChevronLeft size={18} className={`transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`} />
           </button>
         </div>
 
         {/* New Chat Button */}
-        <div className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-3" : "p-4"}`}>
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-cyan-500 text-white hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 font-medium text-sm shadow-lg hover:shadow-cyan-500/25 active:scale-95">
-            <Plus size={18} />
+        <div className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2" : "p-3"}`}>
+          <button className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-cyan-500/40 hover:border-cyan-400/60 text-cyan-400 hover:text-cyan-300 transition-all duration-200 font-medium text-xs active:scale-95 hover:bg-cyan-500/10">
+            <Plus size={16} />
             {!isCollapsed && "New Chat"}
           </button>
         </div>
