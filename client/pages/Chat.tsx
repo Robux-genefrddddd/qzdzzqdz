@@ -99,7 +99,7 @@ export default function Chat() {
     if (!input.trim() || !user) return;
 
     const messageText = input;
-    let chatId = currentChatId;
+    let chatId = currentChatIdRef.current;
 
     if (!chatId) {
       const newChatId = await saveNewChat(
@@ -107,6 +107,7 @@ export default function Chat() {
       );
       if (newChatId) {
         chatId = newChatId;
+        currentChatIdRef.current = newChatId;
         setCurrentChatId(newChatId);
       } else {
         console.error("Failed to create new chat");
