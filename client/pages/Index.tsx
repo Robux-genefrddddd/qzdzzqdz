@@ -4,6 +4,7 @@ import StarBorder from "@/components/StarBorder";
 import GooeyButton from "@/components/GooeyButton";
 import LogoCarousel from "@/components/LogoCarousel";
 import Squares from "@/components/Squares";
+import GradualBlur from "@/components/GradualBlur";
 import Footer from "@/components/Footer";
 
 export default function Index() {
