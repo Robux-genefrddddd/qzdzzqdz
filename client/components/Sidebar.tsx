@@ -39,7 +39,7 @@ interface ChatItem {
   timestamp?: Date;
 }
 
-export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
+export default function Sidebar({ isOpen = true, onClose, currentChatId }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
