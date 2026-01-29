@@ -153,9 +153,7 @@ export default function Chat() {
       };
 
       setMessages((prev) => [...prev, aiMessage]);
-      if (chatId) {
-        await saveMessage(aiMessage);
-      }
+      await saveMessage(aiMessage, chatId);
     } catch (error) {
       console.error("Chat error:", error);
       const errorMessage: Message = {
