@@ -17,7 +17,13 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchModal from "./SearchModal";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/config/firebase";
-import { collection, query, orderBy, onSnapshot, limit } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  limit,
+} from "firebase/firestore";
 import { toast } from "sonner";
 
 interface SidebarProps {
@@ -56,7 +62,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
       const q = query(chatsRef, orderBy("updatedAt", "desc"), limit(10));
 
       const unsubscribe = onSnapshot(q, (snapshot) => {
-        const chats: ChatItem[] = snapshot.docs.map(doc => {
+        const chats: ChatItem[] = snapshot.docs.map((doc) => {
           const data = doc.data();
           const date = data.updatedAt?.toDate?.() || new Date();
           return {
@@ -198,7 +204,10 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         <div
           className={`border-b border-gray-800/30 transition-all duration-300 ${isCollapsed ? "p-2" : "p-3"}`}
         >
-          <button onClick={handleNewChat} className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-cyan-500/40 hover:border-cyan-400/60 text-cyan-400 hover:text-cyan-300 transition-all duration-200 font-medium text-xs active:scale-95 hover:bg-cyan-500/10">
+          <button
+            onClick={handleNewChat}
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-cyan-500/40 hover:border-cyan-400/60 text-cyan-400 hover:text-cyan-300 transition-all duration-200 font-medium text-xs active:scale-95 hover:bg-cyan-500/10"
+          >
             <Plus size={16} />
             {!isCollapsed && "New Chat"}
           </button>
@@ -301,24 +310,36 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         >
           {!isCollapsed && (
             <>
-              <Link to="/resources" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+              <Link
+                to="/resources"
+                className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400"
+              >
                 <BookOpen size={16} />
                 <span className="text-xs">Resources</span>
               </Link>
-              <Link to="/feedback" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+              <Link
+                to="/feedback"
+                className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400"
+              >
                 <HelpCircle size={16} />
                 <span className="text-xs">Help & Feedback</span>
               </Link>
             </>
           )}
-          <Link to="/settings" className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
+          <Link
+            to="/settings"
+            className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group"
+          >
             <Settings
               size={16}
               className="transition-transform duration-200 group-hover:rotate-90"
             />
             {!isCollapsed && <span className="text-xs">Settings</span>}
           </Link>
-          <button onClick={handleLogout} className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400"
+          >
             <LogOut size={16} />
             {!isCollapsed && <span className="text-xs">Sign Out</span>}
           </button>
@@ -333,9 +354,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                   <p className="text-xs font-medium text-gray-300 truncate">
                     {user?.email?.split("@")[0] || "User"}
                   </p>
-                  <p className="text-xs text-gray-500 truncate">
-                    {userEmail}
-                  </p>
+                  <p className="text-xs text-gray-500 truncate">{userEmail}</p>
                 </div>
               </button>
             </div>

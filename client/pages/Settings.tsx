@@ -1,4 +1,13 @@
-import { ArrowLeft, Save, Mail, Bell, Palette, Lock, Shield, Zap } from "lucide-react";
+import {
+  ArrowLeft,
+  Save,
+  Mail,
+  Bell,
+  Palette,
+  Lock,
+  Shield,
+  Zap,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
@@ -115,7 +124,9 @@ export default function Settings() {
             {/* Header Section */}
             <div className="mb-12">
               <h2 className="text-3xl font-bold mb-2">Settings</h2>
-              <p className="text-gray-400">Manage your account preferences and settings</p>
+              <p className="text-gray-400">
+                Manage your account preferences and settings
+              </p>
             </div>
 
             {/* Account Section */}
@@ -132,7 +143,9 @@ export default function Settings() {
                     <Mail size={16} className="text-cyan-400" />
                     <p className="text-sm text-gray-400">Email Address</p>
                   </div>
-                  <p className="font-medium text-lg break-all">{authUser?.email}</p>
+                  <p className="font-medium text-lg break-all">
+                    {authUser?.email}
+                  </p>
                 </div>
                 <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-cyan-500/30 transition-all duration-200">
                   <div className="flex items-center gap-2 mb-3">
@@ -141,7 +154,9 @@ export default function Settings() {
                   </div>
                   <p className="font-medium text-lg">
                     {authUser?.metadata?.creationTime
-                      ? new Date(authUser.metadata.creationTime).toLocaleDateString()
+                      ? new Date(
+                          authUser.metadata.creationTime,
+                        ).toLocaleDateString()
                       : "N/A"}
                   </p>
                 </div>
@@ -161,7 +176,9 @@ export default function Settings() {
                 <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-white">Email Notifications</p>
+                      <p className="font-medium text-white">
+                        Email Notifications
+                      </p>
                       <p className="text-sm text-gray-400 mt-1">
                         Receive updates about your account and chats
                       </p>
@@ -189,7 +206,9 @@ export default function Settings() {
                 <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-white">Chat Notifications</p>
+                      <p className="font-medium text-white">
+                        Chat Notifications
+                      </p>
                       <p className="text-sm text-gray-400 mt-1">
                         Get notified when you receive new messages
                       </p>
@@ -230,7 +249,9 @@ export default function Settings() {
                     >
                       <span
                         className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                          preferences.apiAccess ? "translate-x-6" : "translate-x-1"
+                          preferences.apiAccess
+                            ? "translate-x-6"
+                            : "translate-x-1"
                         }`}
                       />
                     </button>

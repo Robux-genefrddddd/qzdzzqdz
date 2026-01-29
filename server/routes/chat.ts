@@ -20,20 +20,23 @@ export const handleChat: RequestHandler = async (req, res) => {
         .json({ error: "OpenRouter API key not configured" });
     }
 
-    const response = await fetch("https://openrouter.io/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-        "HTTP-Referer": "https://pinia.example.com",
-        "X-Title": "PinIA Chat",
+    const response = await fetch(
+      "https://openrouter.io/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+          "HTTP-Referer": "https://pinia.example.com",
+          "X-Title": "PinIA Chat",
+        },
+        body: JSON.stringify({
+          model: "allenai/molmo-2-8b:free",
+          messages: messages,
+          max_tokens: 1024,
+        }),
       },
-      body: JSON.stringify({
-        model: "allenai/molmo-2-8b:free",
-        messages: messages,
-        max_tokens: 1024,
-      }),
-    });
+    );
 
     if (!response.ok) {
       const errorData = await response.json();

@@ -6,7 +6,14 @@ import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/config/firebase";
-import { doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  serverTimestamp,
+} from "firebase/firestore";
 
 interface Message {
   id: string;
@@ -46,7 +53,13 @@ export default function Chat() {
   const saveNewChat = async (title: string) => {
     if (!user) return;
     try {
-      const chatDocRef = doc(db, "users", user.uid, "chats", Date.now().toString());
+      const chatDocRef = doc(
+        db,
+        "users",
+        user.uid,
+        "chats",
+        Date.now().toString(),
+      );
       await setDoc(chatDocRef, {
         title,
         createdAt: serverTimestamp(),
@@ -86,7 +99,9 @@ export default function Chat() {
 
     if (!chatId) {
       const newChatId = Date.now().toString();
-      await saveNewChat(messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""));
+      await saveNewChat(
+        messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""),
+      );
       chatId = newChatId;
       setCurrentChatId(newChatId);
     }
@@ -111,10 +126,7 @@ export default function Chat() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: [
-            ...messages,
-            userMessage,
-          ].map((msg) => ({
+          messages: [...messages, userMessage].map((msg) => ({
             role: msg.sender === "user" ? "user" : "assistant",
             content: msg.text,
           })),
@@ -208,7 +220,9 @@ export default function Chat() {
                   <div
                     key={message.id}
                     className={`flex animate-fade-in-up gap-3 mb-2 ${
-                      message.sender === "user" ? "justify-end" : "justify-start"
+                      message.sender === "user"
+                        ? "justify-end"
+                        : "justify-start"
                     }`}
                   >
                     {message.sender === "ai" && (
@@ -220,7 +234,9 @@ export default function Chat() {
                     )}
                     <div className="flex flex-col gap-1 max-w-xs sm:max-w-md lg:max-w-2xl">
                       {message.sender === "ai" && (
-                        <span className="text-xs text-gray-500 font-medium px-1">PinIA</span>
+                        <span className="text-xs text-gray-500 font-medium px-1">
+                          PinIA
+                        </span>
                       )}
                       <div
                         className={`px-4 py-3.5 rounded-2xl transition-all duration-200 backdrop-blur-sm ${
@@ -229,7 +245,9 @@ export default function Chat() {
                             : "bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-gray-100 rounded-bl-lg border border-gray-700/50 hover:border-gray-600/70"
                         }`}
                       >
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.text}</p>
+                        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+                          {message.text}
+                        </p>
                         <span
                           className={`text-xs mt-2 block font-medium ${
                             message.sender === "user"
@@ -261,7 +279,9 @@ export default function Chat() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-xs text-gray-500 font-medium px-1">{typingUsername} is typing...</span>
+                      <span className="text-xs text-gray-500 font-medium px-1">
+                        {typingUsername} is typing...
+                      </span>
                       <div className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 text-white rounded-2xl rounded-bl-lg border border-gray-700/50 backdrop-blur-sm px-4 py-3.5">
                         <div className="flex gap-1.5">
                           <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />

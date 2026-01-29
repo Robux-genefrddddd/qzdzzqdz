@@ -1,4 +1,13 @@
-import { ArrowLeft, Send, Bug, Lightbulb, MessageSquare, AlertCircle, CheckCircle, Clock } from "lucide-react";
+import {
+  ArrowLeft,
+  Send,
+  Bug,
+  Lightbulb,
+  MessageSquare,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import Squares from "@/components/Squares";
@@ -122,7 +131,9 @@ export default function Feedback() {
 
                   {/* Title */}
                   <div>
-                    <label className="block text-sm font-semibold mb-3">Title</label>
+                    <label className="block text-sm font-semibold mb-3">
+                      Title
+                    </label>
                     <input
                       type="text"
                       value={title}
