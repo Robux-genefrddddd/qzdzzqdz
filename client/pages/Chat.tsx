@@ -118,25 +118,44 @@ export default function Chat() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex animate-fade-in-up ${
+                  className={`flex animate-fade-in-up gap-2 ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  <div
-                    className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-lg ${
-                      message.sender === "user"
-                        ? "bg-cyan-600 text-white rounded-br-none"
-                        : "bg-gray-900 text-white rounded-bl-none border border-gray-800"
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed">{message.text}</p>
-                    <span className="text-xs opacity-70 mt-1 block">
-                      {message.timestamp.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
+                  {message.sender === "ai" && (
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                        P
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1">
+                    {message.sender === "ai" && (
+                      <span className="text-xs text-gray-400 ml-0.5">PinIA</span>
+                    )}
+                    <div
+                      className={`max-w-xs sm:max-w-md lg:max-w-2xl px-4 py-3 rounded-xl ${
+                        message.sender === "user"
+                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-br-none shadow-lg shadow-cyan-500/20"
+                          : "bg-gray-900/80 text-white rounded-bl-none border border-gray-800/50"
+                      }`}
+                    >
+                      <p className="text-sm leading-relaxed">{message.text}</p>
+                      <span className={`text-xs mt-1.5 block ${message.sender === "user" ? "opacity-70" : "opacity-60 text-gray-400"}`}>
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                    </div>
                   </div>
+                  {message.sender === "user" && (
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                        U
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
               {isLoading && (
