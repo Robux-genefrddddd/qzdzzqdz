@@ -1,7 +1,5 @@
 import "./global.css";
 
-import "./global.css";
-
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -13,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
+import PageTransition from "./components/PageTransition";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <PageTransition />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />

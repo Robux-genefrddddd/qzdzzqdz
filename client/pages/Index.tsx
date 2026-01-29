@@ -6,6 +6,7 @@ import LogoCarousel from "@/components/LogoCarousel";
 import Squares from "@/components/Squares";
 import GradualBlur from "@/components/GradualBlur";
 import Footer from "@/components/Footer";
+import TransitionLink from "@/components/TransitionLink";
 
 export default function Index() {
   return (
@@ -29,12 +30,12 @@ export default function Index() {
             <Link to="/" className="flex items-center gap-2">
               <div className="text-2xl font-bold text-white">PinIA</div>
             </Link>
-            <Link
+            <TransitionLink
               to="/login"
-              className="text-sm text-gray-400 hover:text-white transition-colors duration-300"
+              className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-cyan-500/30 active:scale-95"
             >
               Sign in
-            </Link>
+            </TransitionLink>
           </div>
         </nav>
 
@@ -46,13 +47,16 @@ export default function Index() {
               <h1 className="text-hero">
                 AI Assistant
                 <br />
-                <span className="gradient-text">for Roblox Creators</span>
+                <span className="text-white underline decoration-1 underline-offset-8 opacity-90">
+                  FOR Roblox Creators
+                </span>
               </h1>
 
               {/* Subtitle */}
               <p className="text-subheader mx-auto max-w-2xl">
-                Create, optimize, and scale your Roblox games with intelligent
-                guidance and best practices.
+                An intelligent AI designed specifically for Roblox creators to
+                design, optimize, and scale your games with professional
+                guidance and industry best practices.
               </p>
             </div>
 
