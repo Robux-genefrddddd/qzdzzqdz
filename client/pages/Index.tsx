@@ -13,7 +13,17 @@ import Footer from "@/components/Footer";
 
 export default function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col relative">
+      {/* Aurora Background */}
+      <div className="fixed inset-0 z-0 opacity-30">
+        <Aurora
+          colorStops={['#5227FF', '#00ff88', '#5227FF']}
+          amplitude={0.8}
+          blend={0.6}
+          speed={0.8}
+        />
+      </div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/40 via-background/60 to-background"></div>
       {/* Navigation */}
       <nav className="border-b border-border/20 backdrop-blur-md sticky top-0 z-40 bg-background/40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
