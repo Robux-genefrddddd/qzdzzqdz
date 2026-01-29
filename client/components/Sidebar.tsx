@@ -25,16 +25,75 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+interface ChatItem {
+  id: string;
+  title: string;
+  date: string;
+  timestamp?: Date;
+}
+
 export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userInitial, setUserInitial] = useState("U");
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const chatHistory = [
-    { id: 1, title: "Roblox Game Design Tips", date: "Today" },
-    { id: 2, title: "Lua Scripting Optimization", date: "Yesterday" },
-    { id: 3, title: "Asset Development Pipeline", date: "2 days ago" },
-    { id: 4, title: "Monetization Strategies", date: "1 week ago" },
-  ];
+  useEffect(() => {
+    if (user) {
+      setUserEmail(user.email || "");
+      setUserInitial(user.email?.charAt(0).toUpperCase() || "U");
+
+      // Fetch recent chats from Firebase
+      const chatsRef = collection(db, "users", user.uid, "chats");
+      const q = query(chatsRef, orderBy("updatedAt", "desc"), limit(10));
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const chats: ChatItem[] = snapshot.docs.map(doc => {
+          const data = doc.data();
+          const date = data.updatedAt?.toDate?.() || new Date();
+          return {
+            id: doc.id,
+            title: data.title || "Untitled Chat",
+            date: formatDate(date),
+            timestamp: date,
+          };
+        });
+        setChatHistory(chats);
+      });
+
+      return unsubscribe;
+    }
+  }, [user]);
+
+  const formatDate = (date: Date) => {
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    if (days === 0) return "Today";
+    if (days === 1) return "Yesterday";
+    if (days < 7) return `${days} days ago`;
+    return `${Math.floor(days / 7)} weeks ago`;
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+      toast.success("Signed out successfully");
+    } catch (error) {
+      toast.error("Failed to sign out");
+    }
+  };
+
+  const handleNewChat = () => {
+    navigate("/chat");
+    onClose?.();
+  };
 
   return (
     <>
