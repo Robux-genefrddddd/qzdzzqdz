@@ -23,15 +23,12 @@ export const handleChat: RequestHandler = async (req, res) => {
     }
 
     console.log("Sending request to OpenRouter with messages:", messages.length);
-    console.log("Messages:", JSON.stringify(messages, null, 2));
 
     const requestBody = {
-      model: "allenai/molmo-2-8b:free",
+      model: "meta-llama/llama-2-7b-chat:free",
       messages: messages,
       max_tokens: 1024,
     };
-
-    console.log("Request body:", JSON.stringify(requestBody, null, 2));
 
     const response = await fetch(
       "https://openrouter.io/api/v1/chat/completions",
@@ -47,9 +44,24 @@ export const handleChat: RequestHandler = async (req, res) => {
       },
     );
 
-    const data = await response.json();
     console.log("OpenRouter response status:", response.status);
-    console.log("OpenRouter response data:", JSON.stringify(data, null, 2));
+
+    // Read response as text first to debug
+    const responseText = await response.text();
+    console.log("OpenRouter raw response:", responseText);
+
+    if (!responseText) {
+      console.error("OpenRouter returned empty response");
+      return res.status(500).json({ error: "Empty response from OpenRouter" });
+    }
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse OpenRouter response:", e);
+      return res.status(500).json({ error: "Invalid response format from OpenRouter" });
+    }
 
     if (!response.ok) {
       console.error("OpenRouter error:", data);
