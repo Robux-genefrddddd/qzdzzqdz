@@ -206,10 +206,10 @@ export default function Register() {
               >
                 Confirm Password
               </label>
-              <div className="relative">
+              <div className="relative group">
                 <Lock
                   size={16}
-                  className="absolute left-3 top-2.5 text-gray-500"
+                  className="absolute left-3 top-2.5 text-gray-500 group-focus-within:text-cyan-400 transition-colors duration-300"
                 />
                 <input
                   id="confirmPassword"
@@ -218,10 +218,27 @@ export default function Register() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-1.5 text-sm bg-gray-900 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all"
+                  className="w-full pl-10 pr-4 py-1.5 text-sm bg-gray-900 border border-gray-800 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 hover:border-gray-700 transition-all duration-300"
                   required
                 />
+                {formData.confirmPassword && passwordsMatch && (
+                  <Check
+                    size={16}
+                    className="absolute right-3 top-2.5 text-green-500 animate-in fade-in scale-in duration-300"
+                  />
+                )}
               </div>
+              {formData.confirmPassword && (
+                <p
+                  className={`text-xs mt-1 transition-colors duration-300 ${
+                    passwordsMatch
+                      ? "text-green-400 animate-in fade-in slide-in-from-top-2 duration-300"
+                      : "text-red-400 animate-in fade-in slide-in-from-top-2 duration-300"
+                  }`}
+                >
+                  {passwordsMatch ? "✓ Les mots de passe correspondent" : "✗ Les mots de passe ne correspondent pas"}
+                </p>
+              )}
             </div>
 
             {/* Terms checkbox */}
