@@ -78,11 +78,15 @@ export default function Index() {
                 { title: "Design", desc: "Game mechanics and system design" },
                 { title: "Support", desc: "Instant answers whenever you need help" },
               ].map((feature, i) => (
-                <div key={i} className="card-premium group cursor-pointer">
-                  <h3 className="font-semibold text-lg mb-3 group-hover:text-cyan-400 transition-colors">
+                <div
+                  key={i}
+                  className="card-premium group cursor-pointer animate-fade-in-up"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <h3 className="font-semibold text-lg mb-3 group-hover:text-cyan-400 transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                  <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
                     {feature.desc}
                   </p>
                 </div>
