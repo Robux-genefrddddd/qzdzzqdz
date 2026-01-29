@@ -240,29 +240,34 @@ export default function Settings() {
             </section>
 
             {/* Preferences Section */}
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Appearance</h2>
-              <div className="p-6 rounded-lg bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50">
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-600/20">
+                  <Palette size={20} className="text-purple-400" />
+                </div>
+                <h3 className="text-xl font-semibold">Appearance</h3>
+              </div>
+              <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50">
                 <div>
-                  <p className="font-medium mb-3">Theme</p>
-                  <div className="flex gap-3">
+                  <p className="font-medium mb-4 text-white">Theme</p>
+                  <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() =>
                         setPreferences((prev) => ({ ...prev, theme: "dark" }))
                       }
-                      className={`px-4 py-2 rounded-lg transition-all ${
+                      className={`px-4 py-3 rounded-lg transition-all font-medium ${
                         preferences.theme === "dark"
-                          ? "bg-cyan-500 text-white"
-                          : "bg-gray-900/40 text-gray-400 hover:bg-gray-900/60"
+                          ? "bg-gradient-to-r from-cyan-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/25"
+                          : "bg-gray-900/40 text-gray-400 hover:bg-gray-900/60 border border-gray-800"
                       }`}
                     >
-                      Dark
+                      ◐ Dark
                     </button>
                     <button
                       disabled
-                      className="px-4 py-2 rounded-lg bg-gray-900/20 text-gray-500 cursor-not-allowed opacity-50"
+                      className="px-4 py-3 rounded-lg bg-gray-900/20 text-gray-500 cursor-not-allowed opacity-50 border border-gray-800 font-medium"
                     >
-                      Light (Coming Soon)
+                      ☀ Light (Soon)
                     </button>
                   </div>
                 </div>
@@ -270,14 +275,16 @@ export default function Settings() {
             </section>
 
             {/* Save Button */}
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95 flex items-center justify-center gap-2"
-            >
-              <Save size={18} />
-              {isSaving ? "Saving..." : "Save Settings"}
-            </button>
+            <div className="sticky bottom-0 bg-black/80 backdrop-blur-sm -m-6 p-6 border-t border-gray-800/30">
+              <button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95 flex items-center justify-center gap-2"
+              >
+                <Save size={18} />
+                {isSaving ? "Saving..." : "Save Settings"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
