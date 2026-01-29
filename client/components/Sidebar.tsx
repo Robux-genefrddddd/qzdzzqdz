@@ -99,6 +99,61 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
     onClose?.();
   };
 
+  const handleDeleteChat = async (chatId: string) => {
+    if (!user) return;
+    try {
+      const chatRef = doc(db, "users", user.uid, "chats", chatId);
+      const { deleteDoc } = await import("firebase/firestore");
+      await deleteDoc(chatRef);
+      toast.success("Chat deleted");
+      setOpenMenuId(null);
+    } catch (error) {
+      console.error("Error deleting chat:", error);
+      toast.error("Failed to delete chat");
+    }
+  };
+
+  const handleRenameChat = async () => {
+    if (!user || !renamingChatId || !newChatName.trim()) return;
+    try {
+      const chatRef = doc(db, "users", user.uid, "chats", renamingChatId);
+      const { updateDoc, serverTimestamp } = await import("firebase/firestore");
+      await updateDoc(chatRef, {
+        title: newChatName,
+        updatedAt: serverTimestamp(),
+      });
+      toast.success("Chat renamed");
+      setRenameModalOpen(false);
+      setRenamingChatId(null);
+      setNewChatName("");
+      setOpenMenuId(null);
+    } catch (error) {
+      console.error("Error renaming chat:", error);
+      toast.error("Failed to rename chat");
+    }
+  };
+
+  const handleShareChat = (chatId: string, title: string) => {
+    const shareText = `Check out this chat: ${title}`;
+    if (navigator.share) {
+      navigator.share({
+        title: "PinIA Chat",
+        text: shareText,
+      });
+    } else {
+      navigator.clipboard.writeText(shareText);
+      toast.success("Chat link copied to clipboard");
+    }
+    setOpenMenuId(null);
+  };
+
+  const openRenameModal = (chatId: string, currentTitle: string) => {
+    setRenamingChatId(chatId);
+    setNewChatName(currentTitle);
+    setRenameModalOpen(true);
+    setOpenMenuId(null);
+  };
+
   return (
     <>
       {/* Mobile overlay */}
