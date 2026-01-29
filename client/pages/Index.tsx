@@ -155,15 +155,16 @@ export default function Index() {
                 <h2 className="text-4xl sm:text-5xl font-bold mb-4">Ready to Create?</h2>
                 <p className="text-gray-400">Join creators building the next generation of Roblox games</p>
               </div>
-              <StarBorder
-                as={Link}
-                to="/chat"
-                className="inline-block"
-                color="#00d4ff"
-                speed="5s"
-              >
-                Start Free
-              </StarBorder>
+              <GooeyButton as={Link} to="/chat">
+                <StarBorder
+                  as="span"
+                  className="inline-block cursor-pointer"
+                  color="#00d4ff"
+                  speed="5s"
+                >
+                  Start Free
+                </StarBorder>
+              </GooeyButton>
             </div>
           </div>
         </section>
