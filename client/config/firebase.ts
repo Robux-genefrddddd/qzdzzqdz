@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDMsFeXMVm61NlmN8QBk7UmH1ngPFW8TWo",
-  authDomain: "keysystem-d0b86.firebaseapp.com",
-  projectId: "keysystem-d0b86",
-  storageBucket: "keysystem-d0b86.firebasestorage.app",
-  messagingSenderId: "1012783086146",
-  appId: "1:1012783086146:web:6ae932b13a9e9c992a4bdb",
-  measurementId: "G-PML2TD3Z35",
+  apiKey: "AIzaSyD7KlxN05OoSCGHwjXhiiYyKF5bOXianLY",
+  authDomain: "keysystem-d0b86-8df89.firebaseapp.com",
+  projectId: "keysystem-d0b86-8df89",
+  storageBucket: "keysystem-d0b86-8df89.firebasestorage.app",
+  messagingSenderId: "1048409565735",
+  appId: "1:1048409565735:web:5a9f5422826949490dfc02",
+  measurementId: "G-GK1R043YTV",
 };
 
 // Initialize Firebase
