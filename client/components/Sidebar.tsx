@@ -243,7 +243,12 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
           )}
           {chatHistory.map((chat) => (
             <div key={chat.id} className="group relative">
-              <button className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100">
+              <button
+                onClick={() => {
+                  navigate(`/chat?chat=${chat.id}`);
+                  onClose?.();
+                }}
+                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100">
                 <div className="flex items-start gap-2">
                   <MessageCircle
                     size={14}
