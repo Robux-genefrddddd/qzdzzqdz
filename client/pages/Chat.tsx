@@ -81,13 +81,15 @@ export default function Chat() {
     e.preventDefault();
     if (!input.trim() || !user) return;
 
+    const messageText = input;
+
     if (!currentChatId) {
-      await saveNewChat(input.slice(0, 50) + (input.length > 50 ? "..." : ""));
+      await saveNewChat(messageText.slice(0, 50) + (messageText.length > 50 ? "..." : ""));
     }
 
     const userMessage: Message = {
       id: Math.random().toString(),
-      text: input,
+      text: messageText,
       sender: "user",
       timestamp: new Date(),
     };
@@ -96,11 +98,12 @@ export default function Chat() {
     await saveMessage(userMessage);
     setInput("");
     setIsLoading(true);
+    setTypingUsername("PinIA");
 
     setTimeout(async () => {
       const aiMessage: Message = {
         id: Math.random().toString(),
-        text: `Thanks for asking about "${input}". This is a simulated response from PinIA. In a production environment, this would be connected to an actual AI service to provide expert guidance on Roblox game development.`,
+        text: `Thanks for asking about "${messageText}". This is a simulated response from PinIA. In a production environment, this would be connected to an actual AI service to provide expert guidance on Roblox game development.`,
         sender: "ai",
         timestamp: new Date(),
       };
@@ -109,6 +112,7 @@ export default function Chat() {
         await saveMessage(aiMessage);
       }
       setIsLoading(false);
+      setTypingUsername(null);
     }, 1000);
   };
 
