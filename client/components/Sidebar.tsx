@@ -127,7 +127,6 @@ export default function Sidebar({ isOpen = true, onClose, currentChatId }: Sideb
     if (!user || !renamingChatId || !newChatName.trim()) return;
     try {
       const chatRef = doc(db, "users", user.uid, "chats", renamingChatId);
-      const { updateDoc, serverTimestamp } = await import("firebase/firestore");
       await updateDoc(chatRef, {
         title: newChatName,
         updatedAt: serverTimestamp(),
