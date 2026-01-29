@@ -249,7 +249,11 @@ export default function Sidebar({ isOpen = true, onClose, currentChatId }: Sideb
                   navigate(`/chat?chat=${chat.id}`);
                   onClose?.();
                 }}
-                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-300 hover:text-gray-100">
+                className={`w-full text-left px-2 py-1.5 rounded-lg transition-all duration-200 ${
+                  currentChatId === chat.id
+                    ? "bg-cyan-500/20 border-l-2 border-cyan-500 text-cyan-300 hover:bg-cyan-500/30"
+                    : "hover:bg-gray-900/40 text-gray-300 hover:text-gray-100"
+                }`}>
                 <div className="flex items-start gap-2">
                   <MessageCircle
                     size={14}
