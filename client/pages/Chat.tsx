@@ -88,16 +88,20 @@ export default function Chat() {
                 text: msg.text,
                 sender: msg.sender,
                 timestamp: new Date(msg.timestamp),
-              })
+              }),
             );
-            setMessages(loadedMessages.length > 0 ? loadedMessages : [
-              {
-                id: "1",
-                text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
-                sender: "ai",
-                timestamp: new Date(),
-              },
-            ]);
+            setMessages(
+              loadedMessages.length > 0
+                ? loadedMessages
+                : [
+                    {
+                      id: "1",
+                      text: "Hi! I'm PinIA, your dedicated assistant for Roblox game development. How can I help you today?",
+                      sender: "ai",
+                      timestamp: new Date(),
+                    },
+                  ],
+            );
             currentChatIdRef.current = chatParam;
             setCurrentChatId(chatParam);
             setInput("");
@@ -129,13 +133,7 @@ export default function Chat() {
     if (!user) return null;
     try {
       const chatId = Date.now().toString();
-      const chatDocRef = doc(
-        db,
-        "users",
-        user.uid,
-        "chats",
-        chatId,
-      );
+      const chatDocRef = doc(db, "users", user.uid, "chats", chatId);
       await setDoc(chatDocRef, {
         title,
         createdAt: serverTimestamp(),
@@ -272,7 +270,11 @@ export default function Chat() {
 
       {/* Sidebar */}
       <div className="relative z-50">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} currentChatId={currentChatId} />
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          currentChatId={currentChatId}
+        />
       </div>
 
       {/* Main chat area */}

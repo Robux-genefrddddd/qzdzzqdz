@@ -43,7 +43,11 @@ interface ChatItem {
   timestamp?: Date;
 }
 
-export default function Sidebar({ isOpen = true, onClose, currentChatId }: SidebarProps) {
+export default function Sidebar({
+  isOpen = true,
+  onClose,
+  currentChatId,
+}: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
@@ -255,7 +259,8 @@ export default function Sidebar({ isOpen = true, onClose, currentChatId }: Sideb
                   currentChatId === chat.id
                     ? "bg-cyan-500/20 border-l-2 border-cyan-500 text-cyan-300 hover:bg-cyan-500/30"
                     : "hover:bg-gray-900/40 text-gray-300 hover:text-gray-100"
-                }`}>
+                }`}
+              >
                 <div className="flex items-start gap-2">
                   <MessageCircle
                     size={14}

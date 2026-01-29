@@ -22,7 +22,10 @@ export const handleChat: RequestHandler = async (req, res) => {
         .json({ error: "OpenRouter API key not configured" });
     }
 
-    console.log("Sending request to OpenRouter with messages:", messages.length);
+    console.log(
+      "Sending request to OpenRouter with messages:",
+      messages.length,
+    );
 
     const requestBody = {
       model: "openai/gpt-3.5-turbo",
@@ -69,7 +72,9 @@ export const handleChat: RequestHandler = async (req, res) => {
           return res.status(response.status).json({ error: responseText });
         }
       }
-      return res.status(response.status).json({ error: "Empty error response from OpenRouter" });
+      return res
+        .status(response.status)
+        .json({ error: "Empty error response from OpenRouter" });
     }
 
     if (!responseText) {
@@ -82,16 +87,25 @@ export const handleChat: RequestHandler = async (req, res) => {
       data = JSON.parse(responseText);
     } catch (e) {
       console.error("Failed to parse OpenRouter response:", e);
-      return res.status(500).json({ error: "Invalid response format from OpenRouter" });
+      return res
+        .status(500)
+        .json({ error: "Invalid response format from OpenRouter" });
     }
 
     const assistantMessage =
       data.choices?.[0]?.message?.content || "I couldn't generate a response.";
 
-    console.log("OpenRouter response received:", assistantMessage.substring(0, 100));
+    console.log(
+      "OpenRouter response received:",
+      assistantMessage.substring(0, 100),
+    );
     res.json({ message: assistantMessage });
   } catch (error) {
     console.error("Chat API error:", error);
-    res.status(500).json({ error: `Server error: ${error instanceof Error ? error.message : "Unknown error"}` });
+    res
+      .status(500)
+      .json({
+        error: `Server error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      });
   }
 };
