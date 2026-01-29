@@ -53,12 +53,13 @@ export default function Chat() {
   const saveNewChat = async (title: string) => {
     if (!user) return;
     try {
+      const chatId = Date.now().toString();
       const chatDocRef = doc(
         db,
         "users",
         user.uid,
         "chats",
-        Date.now().toString(),
+        chatId,
       );
       await setDoc(chatDocRef, {
         title,
@@ -66,9 +67,11 @@ export default function Chat() {
         updatedAt: serverTimestamp(),
         messages: [],
       });
-      setCurrentChatId(chatDocRef.id);
+      setCurrentChatId(chatId);
+      return chatId;
     } catch (error) {
       console.error("Error saving chat:", error);
+      return null;
     }
   };
 
