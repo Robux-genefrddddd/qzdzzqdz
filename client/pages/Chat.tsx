@@ -75,10 +75,11 @@ export default function Chat() {
     }
   };
 
-  const saveMessage = async (message: Message) => {
-    if (!user || !currentChatId) return;
+  const saveMessage = async (message: Message, chatId?: string) => {
+    const idToUse = chatId || currentChatId;
+    if (!user || !idToUse) return;
     try {
-      const chatDocRef = doc(db, "users", user.uid, "chats", currentChatId);
+      const chatDocRef = doc(db, "users", user.uid, "chats", idToUse);
       await updateDoc(chatDocRef, {
         messages: arrayUnion({
           id: message.id,
