@@ -133,11 +133,23 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-800/30 p-3 space-y-1">
+          {!isCollapsed && (
+            <>
+              <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+                <BookOpen size={18} />
+                <span className="text-sm">Resources</span>
+              </button>
+              <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400">
+                <HelpCircle size={18} />
+                <span className="text-sm">Help & Feedback</span>
+              </button>
+            </>
+          )}
           <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-cyan-400 group">
             <Settings size={18} className="transition-transform duration-200 group-hover:rotate-90" />
             {!isCollapsed && <span className="text-sm">Settings</span>}
           </button>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-900/40 transition-all duration-200 text-gray-400 hover:text-red-400">
+          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-950/30 transition-all duration-200 text-gray-400 hover:text-red-400">
             <LogOut size={18} />
             {!isCollapsed && <span className="text-sm">Sign Out</span>}
           </button>
