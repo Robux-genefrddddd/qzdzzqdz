@@ -101,7 +101,7 @@ export default function Sidebar({ isOpen = true, onClose }: SidebarProps) {
   };
 
   const handleNewChat = () => {
-    navigate("/chat");
+    navigate("/chat?new=true");
     onClose?.();
   };
 
