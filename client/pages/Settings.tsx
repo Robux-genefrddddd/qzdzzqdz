@@ -149,81 +149,92 @@ export default function Settings() {
             </section>
 
             {/* Notifications Section */}
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Notifications</h2>
-              <div className="space-y-3 p-6 rounded-lg bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50">
+            <section className="mb-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-yellow-500/20 to-orange-600/20">
+                  <Bell size={20} className="text-yellow-400" />
+                </div>
+                <h3 className="text-xl font-semibold">Notifications</h3>
+              </div>
+              <div className="space-y-4">
                 {/* Email Notifications */}
-                <div className="flex items-center justify-between py-3 border-b border-gray-700/30">
-                  <div>
-                    <p className="font-medium">Email Notifications</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      Receive updates about your account and chats
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => togglePreference("emailNotifications")}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      preferences.emailNotifications
-                        ? "bg-cyan-500"
-                        : "bg-gray-700"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">Email Notifications</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Receive updates about your account and chats
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("emailNotifications")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
                         preferences.emailNotifications
-                          ? "translate-x-6"
-                          : "translate-x-1"
+                          ? "bg-cyan-500"
+                          : "bg-gray-700"
                       }`}
-                    />
-                  </button>
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.emailNotifications
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Chat Notifications */}
-                <div className="flex items-center justify-between py-3 border-b border-gray-700/30">
-                  <div>
-                    <p className="font-medium">Chat Notifications</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      Get notified when you receive new messages
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => togglePreference("chatNotifications")}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      preferences.chatNotifications
-                        ? "bg-cyan-500"
-                        : "bg-gray-700"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">Chat Notifications</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Get notified when you receive new messages
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("chatNotifications")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
                         preferences.chatNotifications
-                          ? "translate-x-6"
-                          : "translate-x-1"
+                          ? "bg-cyan-500"
+                          : "bg-gray-700"
                       }`}
-                    />
-                  </button>
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.chatNotifications
+                            ? "translate-x-6"
+                            : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
                 </div>
 
                 {/* API Access */}
-                <div className="flex items-center justify-between py-3">
-                  <div>
-                    <p className="font-medium">API Access</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      Enable API access for integrations
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => togglePreference("apiAccess")}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      preferences.apiAccess ? "bg-cyan-500" : "bg-gray-700"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        preferences.apiAccess ? "translate-x-6" : "translate-x-1"
+                <div className="p-6 rounded-xl bg-gradient-to-br from-gray-900/40 to-gray-950/40 border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-white">API Access</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Enable API access for integrations
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => togglePreference("apiAccess")}
+                      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
+                        preferences.apiAccess ? "bg-cyan-500" : "bg-gray-700"
                       }`}
-                    />
-                  </button>
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          preferences.apiAccess ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
             </section>
