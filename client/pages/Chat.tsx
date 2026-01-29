@@ -215,25 +215,18 @@ export default function Chat() {
       {/* Auth Modal */}
       {showAuthPrompt && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          <div className="bg-gradient-to-b from-gray-950 to-black border border-gray-800/50 rounded-3xl p-8 max-w-md w-full animate-fade-in-up shadow-2xl">
-            {/* Decorative header */}
-            <div className="flex justify-center mb-8">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                <span className="text-2xl font-bold text-white">P</span>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold text-white mb-3 text-center">
+          <div className="bg-gradient-to-b from-gray-950 to-black border border-gray-800/50 rounded-2xl p-6 max-w-sm w-full animate-fade-in-up shadow-2xl">
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">
               Ready to chat?
             </h2>
-            <p className="text-gray-400 mb-8 text-center text-sm leading-relaxed">
+            <p className="text-gray-400 mb-6 text-center text-xs leading-relaxed">
               Sign in to unlock the full potential of PinIA and start building amazing Roblox games.
             </p>
 
-            <div className="space-y-3 mb-6">
+            <div className="space-y-2 mb-4">
               <Link
                 to="/register"
-                className="block w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-xl hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 text-center font-medium shadow-lg hover:shadow-cyan-500/25 active:scale-95"
+                className="block w-full py-2.5 px-4 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white rounded-lg hover:from-cyan-500 hover:to-cyan-400 transition-all duration-200 text-center font-medium text-sm shadow-lg hover:shadow-cyan-500/25 active:scale-95"
               >
                 Create Account
               </Link>
@@ -242,7 +235,7 @@ export default function Chat() {
                   setShowAuthPrompt(false);
                   setIsAuthenticated(true);
                 }}
-                className="block w-full py-3 px-4 border border-gray-700 text-white rounded-xl hover:bg-gray-900/50 hover:border-gray-600 transition-all duration-200 font-medium"
+                className="block w-full py-2.5 px-4 border border-gray-700 text-white rounded-lg hover:bg-gray-900/50 hover:border-gray-600 transition-all duration-200 font-medium text-sm"
               >
                 Sign In
               </button>
@@ -250,7 +243,7 @@ export default function Chat() {
 
             <button
               onClick={() => setShowAuthPrompt(false)}
-              className="w-full py-3 text-sm text-gray-400 hover:text-gray-200 transition-colors"
+              className="w-full py-2 text-xs text-gray-400 hover:text-gray-200 transition-colors"
             >
               Continue as Guest
             </button>
