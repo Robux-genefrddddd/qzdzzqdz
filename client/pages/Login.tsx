@@ -37,19 +37,21 @@ export default function Login() {
       </div>
 
       {/* Login form */}
-      <div className="relative z-10 w-full flex flex-col justify-center items-center px-6 sm:px-8">
-        <div className="w-full max-w-sm">
+      <div className="relative z-10 w-full flex flex-col justify-center items-center px-6 sm:px-8 animate-page-enter">
+        <div className="w-full max-w-sm space-y-4">
           {/* Logo */}
-          <div className="mb-4 text-center">
-            <Link to="/" className="text-lg font-bold text-white inline-block">
+          <div className="mb-4 text-center" style={{ animationDelay: "0.1s" }}>
+            <Link to="/" className="text-lg font-bold text-white inline-block hover:text-cyan-400 transition-colors duration-300">
               PinIA
             </Link>
           </div>
 
-          <h2 className="text-2xl font-bold text-white mb-1">Sign in</h2>
-          <p className="text-gray-400 mb-6 text-sm">
-            Sign in to your account to access PinIA
-          </p>
+          <div style={{ animationDelay: "0.2s" }}>
+            <h2 className="text-2xl font-bold text-white mb-1">Sign in</h2>
+            <p className="text-gray-400 mb-6 text-sm">
+              Sign in to your account to access PinIA
+            </p>
+          </div>
 
           {/* Login form */}
           <form onSubmit={handleLogin} className="space-y-4">
@@ -133,14 +135,14 @@ export default function Login() {
           </form>
 
           {/* Divider */}
-          <div className="my-4 flex items-center gap-4">
+          <div className="my-4 flex items-center gap-4" style={{ animationDelay: "0.35s" }}>
             <div className="flex-1 h-px bg-gray-800" />
             <span className="text-xs text-gray-500">Or continue with</span>
             <div className="flex-1 h-px bg-gray-800" />
           </div>
 
           {/* OAuth buttons */}
-          <div className="space-y-2">
+          <div className="space-y-2" style={{ animationDelay: "0.4s" }}>
             {/* Google OAuth */}
             <button
               onClick={() => handleOAuthLogin("google")}
