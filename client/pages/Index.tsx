@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import StarBorder from "@/components/StarBorder";
+import GooeyButton from "@/components/GooeyButton";
 import LogoCarousel from "@/components/LogoCarousel";
 import Squares from "@/components/Squares";
 import Footer from "@/components/Footer";
