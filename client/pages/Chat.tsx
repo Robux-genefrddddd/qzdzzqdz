@@ -33,8 +33,48 @@ export default function Chat() {
   const [currentChatId, setCurrentChatId] = useState<string>("");
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      navigate("/login");
+    }
+  }, [user, authLoading, navigate]);
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const saveNewChat = async (title: string) => {
+    if (!user) return;
+    try {
+      const chatDocRef = doc(db, "users", user.uid, "chats", Date.now().toString());
+      await setDoc(chatDocRef, {
+        title,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        messages: [],
+      });
+      setCurrentChatId(chatDocRef.id);
+    } catch (error) {
+      console.error("Error saving chat:", error);
+    }
+  };
+
+  const saveMessage = async (message: Message) => {
+    if (!user || !currentChatId) return;
+    try {
+      const chatDocRef = doc(db, "users", user.uid, "chats", currentChatId);
+      await updateDoc(chatDocRef, {
+        messages: arrayUnion({
+          id: message.id,
+          text: message.text,
+          sender: message.sender,
+          timestamp: message.timestamp.toISOString(),
+        }),
+        updatedAt: serverTimestamp(),
+      });
+    } catch (error) {
+      console.error("Error saving message:", error);
+    }
+  };
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
