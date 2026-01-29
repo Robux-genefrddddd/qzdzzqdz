@@ -242,7 +242,7 @@ export default function Chat() {
 
       {/* Sidebar */}
       <div className="relative z-50">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} currentChatId={currentChatId} />
       </div>
 
       {/* Main chat area */}
