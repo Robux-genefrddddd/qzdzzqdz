@@ -106,6 +106,7 @@ export default function Chat() {
       );
       if (newChatId) {
         chatId = newChatId;
+        setCurrentChatId(newChatId);
       } else {
         console.error("Failed to create new chat");
         return;
