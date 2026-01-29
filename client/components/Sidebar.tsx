@@ -29,6 +29,7 @@ import { toast } from "sonner";
 interface SidebarProps {
   isOpen?: boolean;
   onClose?: () => void;
+  currentChatId?: string;
 }
 
 interface ChatItem {
